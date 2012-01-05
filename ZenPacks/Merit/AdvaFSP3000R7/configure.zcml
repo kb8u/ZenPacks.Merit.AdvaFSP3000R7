@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- for Adva FSP3000R7 management                                           -->
+<!--                                                                         -->
+<!-- Copyright (C) 2011 Russell Dwarshuis, Merit Network, Inc.               -->
+<!--                                                                         -->
+<!-- This program can be used under the GNU General Public License version 2 -->
+<!-- You can find full information here: http://www.zenoss.com/oss           -->
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:zcml="http://namespaces.zope.org/zcml">
+
+    <configure zcml:condition="installed Products.Zuul">
+        <browser:resourceDirectory
+            name="AdvaFSP3000R7"
+            directory="resources" />
+
+        <!-- Network Element control Unit (NCU-II) -->
+        <adapter
+            factory=".info.NCUInfo"
+            for=".FSP3000R7NCU.FSP3000R7NCU"
+            provides=".interfaces.INCUInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7NCU"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7NCU.js"
+            weight="10"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+        <!-- Optical Service Channel -->
+        <adapter
+            factory=".info.OSCInfo"
+            for=".FSP3000R7OSC.FSP3000R7OSC"
+            provides=".interfaces.IOSCInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7OSC"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7OSC.js"
+            weight="10"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+        <!-- Power supply -->
+        <adapter
+            factory=".info.PowerSupplyInfo"
+            for=".FSP3000R7PowerSupply.FSP3000R7PowerSupply"
+            provides=".interfaces.IPowerSupplyInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7PS"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7PowerSupply.js"
+            weight="11"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+        <!-- Amplifier -->
+        <adapter
+            factory=".info.AmplifierInfo"
+            for=".FSP3000R7Amplifier.FSP3000R7Amplifier"
+            provides=".interfaces.IAmplifierInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Amp"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Amplifier.js"
+            weight="12"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+        <!-- ROADM -->
+        <adapter
+            factory=".info.RoadmInfo"
+            for=".FSP3000R7Roadm.FSP3000R7Roadm"
+            provides=".interfaces.IRoadmInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Roadm"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Roadm.js"
+            weight="13"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+        <!-- Transponders -->
+        <adapter
+            factory=".info.TransponderInfo"
+            for=".FSP3000R7Transponder.FSP3000R7Transponder"
+            provides=".interfaces.ITransponderInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Transponder"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Transponder.js"
+            weight="14"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+    </configure>
+</configure>
