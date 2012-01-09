@@ -24,6 +24,7 @@ The ZenPack has the following:
 
 Component modeling
 ------------------
+Modelers detect most blade and pluggable optical hardware types:
 
 * Power Supply
 
@@ -48,7 +49,7 @@ Component modeling
 Event Class mapping
 -------------------
 
-* Well over a hundred Event Class Mappings for Adva SNMP traps in sensible eventclasses.
+* Well over a hundred Event Class Mappings for Adva SNMP traps in sensible event classes.
 * Event severities match Adva's levels
 
 Requirements
