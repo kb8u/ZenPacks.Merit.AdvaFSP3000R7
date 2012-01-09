@@ -137,4 +137,4 @@ EventClass Mappings
 .. |Device Overview| image:: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/DeviceOverview.png
 .. |Power Supply Component| image:: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/PowerSupply.png
 .. |Transponder Component| image:: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Transponder.png
-.. |EventClass Mappings|| image:: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Mappings.png
+.. |EventClass Mappings| image:: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Mappings.png
