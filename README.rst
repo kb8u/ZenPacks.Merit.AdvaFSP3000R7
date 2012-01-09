@@ -2,6 +2,8 @@
 ZenPacks.Merit.AdvaFSP3000R7
 ============================
 
+.. contents::
+
 Description
 ===========
 Provides monitoring of FSP3000R7 optical transport systems manufactured by Adva
@@ -25,17 +27,21 @@ The ZenPack has the following:
 Component modeling
 ------------------
 * Power Supply
+
  - Component template graphs current
 
 * Optical Amplifier
+
  - Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * NCU-II (shelf controller card)
 
 * Transponder Component Modeling
+
  - Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Optical Service Channel Component Modeling
+
  - Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Fan Component Modeling
