@@ -7,12 +7,13 @@ ZenPacks.Merit.AdvaFSP3000R7
 Description
 ===========
 Provides monitoring of FSP3000R7 optical transport systems manufactured by Adva
-Optical Networking.
+Optical Networking in Zenoss.
 
-This is a subset of the functionality provided by Adva's proprietary Network
-Management System.  Most alerts are implemented and optical signal strength
-is graphed.  Most blade types will be detected when modeling a system.  Alerts
-severities match Adva's NMS severity levels.
+This is a subset of the functionality provided by Adva's proprietary FSP Network
+Manager.  Most alerts are implemented and optical signal strength
+is graphed.  Most blade types will be detected when modeling a system.  The five
+severity levels used in Adva's FSP Network Manager are mapped to the five
+severity levels in Zenoss.
 
 Zenpack contents
 ================
