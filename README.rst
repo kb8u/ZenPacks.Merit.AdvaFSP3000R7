@@ -14,8 +14,6 @@ Management System.  Most alerts are implemented and optical signal strength
 is graphed.  Most blade types will be detected when modeling a system.  Alerts
 severities match Adva's NMS severity levels.
 
-----------------------------------
-
 Zenpack contents
 ================
 The ZenPack has the following:
@@ -51,16 +49,12 @@ Event Class mapping
 * Well over a hundred Event Class Mappings for Adva SNMP traps in sensible eventclasses.
 * Event severeties match Adva's levels
 
--------------------
-
 Requirements
 ============
 * Zenoss Versions Supported: 3.0+
 * External Dependencies: None
 * ZenPack Dependencies: None
 * Configuration: No Special configuration should be necessary.
-
-----------------------------------
 
 Installation
 ============
