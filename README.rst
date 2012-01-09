@@ -50,7 +50,7 @@ Modelers detect most blade and pluggable optical hardware types:
 Event Class mapping
 -------------------
 
-* Well over a hundred Event Class Mappings for Adva SNMP traps in sensible event classes.
+* Well over two hundred Event Class Mappings for Adva SNMP traps in sensible event classes.
 * Event severities match Adva's levels
 
 Requirements
