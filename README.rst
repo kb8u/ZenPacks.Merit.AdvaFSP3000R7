@@ -130,6 +130,7 @@ Transponder Component
 |Transponder Component|
 
 EventClass Mappings
+-------------------
 |EventClass Mappings|
 
 .. External References Below. Nothing Below This Line Should Be Rendered
