@@ -25,29 +25,25 @@ The ZenPack has the following:
 Component modeling
 ------------------
 * Power Supply
-
- - Component template graphs current
+  Component template graphs current
 
 * Optical Amplifier
-
- - Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+  Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * NCU-II (shelf controller card)
 
 * Transponder Component Modeling
-
- - Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+  Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Optical Service Channel Component Modeling
-
- - Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+  Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Fan Component Modeling
 
 Event Class mapping
 -------------------
 * Well over a hundred Event Class Mappings for Adva SNMP traps in sensible eventclasses.
-* Event severeties match Adva's levels
+* Event severities match Adva's levels
 
 Requirements
 ============
