@@ -24,29 +24,36 @@ The ZenPack has the following:
 
 Component modeling
 ------------------
+
 * Power Supply
-  Component template graphs current
+
+  * Component template graphs current
 
 * Optical Amplifier
-  Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+
+  * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * NCU-II (shelf controller card)
 
 * Transponder Component Modeling
-  Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+
+  * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Optical Service Channel Component Modeling
-  Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+
+  * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Fan Component Modeling
 
 Event Class mapping
 -------------------
+
 * Well over a hundred Event Class Mappings for Adva SNMP traps in sensible eventclasses.
 * Event severities match Adva's levels
 
 Requirements
 ============
+
 * Zenoss Versions Supported: 3.0+
 * External Dependencies: None
 * ZenPack Dependencies: None
@@ -88,11 +95,14 @@ developer mode using the following commands::
     
 Change History
 ==============
+
 * 1.0
+
   * Initial Release
 
 Known Issues
 ===========
+
 * Component templates attempt to graph data that may not be available from
   some components.  This will result in debg level events for SNMP variables
   that don't exist for the component.
