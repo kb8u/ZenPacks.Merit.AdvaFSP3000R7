@@ -134,7 +134,7 @@ EventClass Mappings
 
 .. _Latest Package for Python 2.6: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/ZenPacks.Merit.AdvaFSP3000R7-py2.6.egg
 
-.. |Device Overview| image:: https://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/DeviceOverview.png
-.. |Power Supply Component| image:: https://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/PowerSupply.png
-.. |Transponder Component| image:: https://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Transponder.png
-.. |EventClass Mappings| image:: https://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Mappings.png
+.. |Device Overview| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/DeviceOverview.png
+.. |Power Supply Component| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/PowerSupply.png
+.. |Transponder Component| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Transponder.png
+.. |EventClass Mappings| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/Mappings.png
