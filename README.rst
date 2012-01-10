@@ -47,6 +47,14 @@ Modelers detect most blade and pluggable optical hardware types:
 
 * Fan Component Modeling
 
+Adva MIBs
+---------
+Adva Optical Networking vendor MIBs
+
+* ADVA-MIB
+* FspR7-LAYER2-MIB
+* FspR7-MIB
+
 Event Class mapping
 -------------------
 
