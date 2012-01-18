@@ -111,11 +111,15 @@ Change History
   * Initial Release
 
 * 1.1
+
   * Removed Serial number from overview.  It was the database serial number.
+
   * Added system name to Tag field in overview.
+
   * Device modeler FSP3000R7Mib now caches SNMP responses to a file in /tmp
     to work around Zeonss timeout problems with slow SNMP responses from
     large Adva systems.
+
   * Removed FSP3000R7Roadm performance template from device organizer
     performance template.
 
