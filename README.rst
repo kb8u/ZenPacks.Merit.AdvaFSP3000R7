@@ -21,7 +21,7 @@ The ZenPack has the following:
 
 /Network/Adva Device Class
 --------------------------
-* The system serial number is populated in the summary
+* The device overview page has the system name in the Tag field, and the software version number in the OS Model field.
 
 Component modeling
 ------------------
@@ -110,6 +110,15 @@ Change History
 
   * Initial Release
 
+* 1.1
+  * Removed Serial number from overview.  It was the database serial number.
+  * Added system name to Tag field in overview.
+  * Device modeler FSP3000R7Mib now caches SNMP responses to a file in /tmp
+    to work around Zeonss timeout problems with slow SNMP responses from
+    large Adva systems.
+  * Removed FSP3000R7Roadm performance template from device organizer
+    performance template.
+
 Known Issues
 ===========
 
@@ -117,11 +126,13 @@ Known Issues
   some components.  This will result in debg level events for SNMP variables
   that don't exist for the component.
 
-* Adva systems respond slowly to SNMP so modeling will probably silently fail
-  to detect many components if you try to run all all Modeler Plugins at the
-  same time.  The work-around is to repeatedly model with one plugin at a time.
-  The modeler code needs to be modified to not query for the same information
-  repeatedly for each modeler.
+* The Device modeler FSP3000R7Mib must be run before any component modelers.
+
+* SNMP cache file needs to be created in /tmp.  The file will not be removed
+  when the device is deleted from zenoss.  The Adva system must have a name
+  or modeling may fail.  The file name is of the form:
+  /tmp/SYSTEM-NAME.Adva_inventory_SNMP.pickle where
+
 
 Screenshots
 ===========

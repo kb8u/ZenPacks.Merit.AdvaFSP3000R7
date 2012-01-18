@@ -7,61 +7,79 @@
 __doc__="""FSP3000R7MibCommon
 
 FSP3000R7MibCommon is a modeler base class to find components on an
-Adva FSP3000R7 system.  
+Adva FSP3000R7 system.  It stores SNMP data from an Adva system in a
+file in /tmp so if there is more than one component to be modeled, the
+subsequent components will not have to get the same information over.
+Without this, a system may respond so slowly that modeling times out in
+Zenoss.
 
 """
 
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableMap, GetMap
 from Products.DataCollector.plugins.DataMaps import ObjectMap
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Channels import Channels
+import cPickle
+import time
 
 class FSP3000R7MibCommon(SnmpPlugin):
 
     weight = 4
 
-    inventoryTablecolumns = { '.1.1.': 'inventoryUnitName' }
-
-    entityTablecolumns = {
-        '.1.2.': 'entityContainedIn',
-        '.1.5.': 'entityIndexAid',
-        '.1.7.': 'entityAssignmentState',
-    }
-
-    opticalIfDiagcolumns = { '.1.3.': 'opticalIfDiagInputPower' }
-
-    # snmpGetTableMaps gets tabular data
-    snmpGetTableMaps = (
-        GetTableMap('inventoryTableEntry',
-                    '1.3.6.1.4.1.2544.2.5.5.1',
-                    inventoryTablecolumns),
-        GetTableMap('entityTableEntry',
-                    '1.3.6.1.4.1.2544.2.5.5.2',
-                    entityTablecolumns),
-        GetTableMap('opticalIfDiagTableEntry',
-                    '1.3.6.1.4.1.2544.1.11.2.4.3.5',
-                    opticalIfDiagcolumns),
-    )
+    # FspR7-MIB mib neSystemId is .1.3.6.1.4.1.2544.1.11.2.2.1.1.0
+    # use this to get the same of the system for the pickle file
+    snmpGetMap = GetMap({
+        '.1.3.6.1.4.1.2544.1.11.2.2.1.1.0' : 'setHWTag',
+    })
 
 
     def process(self, device, results, log):
         """collect snmp information for components from this device"""
         log.info('processing %s for device %s', self.name(), device.id)
 
+        # tabledata is not used (get tables from cache pickle file created
+        # in FSP3000R7Device modeler)
+        getdata = {}
+        getdata['setHWTag'] = False
         getdata, tabledata = results
-        inventoryTable     = tabledata.get('inventoryTableEntry')
-        entityTable        = tabledata.get('entityTableEntry')
-        opticalIfDiagTable = tabledata.get('opticalIfDiagTableEntry')
+        if getdata['setHWTag'] is False:
+            log.info("Couldn't get system name from Adva shelf.")
+            return
+        if getdata['setHWTag'] == '':
+            log.info("Adva shelf lacks a system name.  Set it before running any modelers.")
+            return
 
-        if not inventoryTable:
+        cache_file_name = '/tmp/' + getdata['setHWTag'] + '.Adva_inventory_SNMP.pickle'
+
+        inventoryTable = entityTable = opticalIfDiagTable = False
+        cache_file_time = 0
+
+        # use cached SNMP results for component modeling
+        bad_cache = 0
+        try:
+            cache_file = open(cache_file_name, 'r')
+            inventoryTable = cPickle.load(cache_file)
+            entityTable = cPickle.load(cache_file)
+            opticalIfDiagTable = cPickle.load(cache_file)
+            cache_file_time = cPickle.load(cache_file)
+            cache_file.close()
+        except IOError,cPickle.PickleError:
+            log.debug('Could not open or read ' + cache_file_name)
+            bad_cache = 1
+
+        if bad_cache or cache_file_time < time.time() - 900:
+            log.warn("Cached SNMP doesn't exist or is older than 15 minutes.  You must include the modeler plugin FSP3000R7Device")
+            return
+
+        if inventoryTable is False:
             log.warn( 'No SNMP inventoryTable response from %s for the %s plugin', device.id, self.name() )
             return;
-        if not entityTable:
+        if entityTable is False:
             log.warn( 'No SNMP entityTable response from %s for the %s plugin', device.id, self.name() )
             return;
         else:
             log.debug('SNMP entityTable and inventoryTable responses received')
         # not all modules will respond to opticalIfDiagTable so don't return 
-        if not opticalIfDiagTable:
+        if opticalIfDiagTable is False:
             log.warn( 'No SNMP opticalIfDiagTable response from %s for the %s plugin', device.id, self.name() )
         else:
             log.debug('SNMP opticalIfDiagTable and inventoryTable responses received')
@@ -97,7 +115,7 @@ class FSP3000R7MibCommon(SnmpPlugin):
                 rm.append(om)
 
                 # Now find sub-organizers that respond to OPR
-                if not opticalIfDiagTable:
+                if opticalIfDiagTable is False:
                   continue
                 if entityIndex_str not in containsModules:
                   continue
