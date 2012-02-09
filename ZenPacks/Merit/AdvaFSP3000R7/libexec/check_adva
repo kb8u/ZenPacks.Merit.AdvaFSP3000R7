@@ -1,0 +1,31 @@
+#!/usr/bin/env perl
+
+# Copyright (C) 2011 Russell Dwarshuis, Merit Network, Inc.
+#
+# This program can be used under the GNU General Public License version 2
+# You can find full information here: http://www.zenoss.com/oss
+
+# Get ethernet statistics on an Adva system.  Can't use stock zenoss
+# zenperfsnmp because there does not seem to be a way to have the snmp
+# index be at other than the last part of the OID.
+
+
+my $ip = $ARGV[0];
+my $community = $ARGV[1];
+my $entityIndex = $ARGV[2];
+
+if (! ($ip && $community && $entityIndex)) {
+  print "FAIL\n";
+  exit 3;
+}
+
+my @o = `snmpget -Ov -Oq -v2c -c $community $ip 1.3.6.1.4.1.2544.1.11.2.6.2.90.1.2.$entityIndex.1 1.3.6.1.4.1.2544.1.11.2.6.2.90.1.3.$entityIndex.1 1.3.6.1.4.1.2544.1.11.2.6.2.90.1.4.$entityIndex.1 1.3.6.1.4.1.2544.1.11.2.6.2.90.1.5.$entityIndex.1`;
+if ($o[0] eq "No Such Instance currently exists at this OID\n" ) {
+  print "OK|GoodFrames=0 PauseFrames=0 CrcFrames=0 Bytes=0\n";
+  exit 1;
+}
+
+map { chomp; s/\"//g } @o;
+
+print "OK|GoodFrames=$o[0] PauseFrames=$o[1] CrcFrames=$o[2] Bytes=$o[3]\n";
+exit 0;
