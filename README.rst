@@ -123,6 +123,13 @@ Change History
   * Removed FSP3000R7Roadm performance template from device organizer
     performance template.
 
+* 1.2
+
+  * Added ethernets statistics.  Note that these are for the prior 15 minute
+    interval.
+
+  * Added Adva entityStateOper checking and /Status/Adva event class
+
 Known Issues
 ===========
 
@@ -158,7 +165,7 @@ EventClass Mappings
 
 .. External References Below. Nothing Below This Line Should Be Rendered
 
-.. _Latest Package for Python 2.6: http://github.com/downloads/kb8u/ZenPacks.Merit.AdvaFSP3000R7/ZenPacks.Merit.AdvaFSP3000R7-py2.6.egg
+.. _Latest Package for Python 2.6: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/downloads
 
 .. |Device Overview| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/DeviceOverview.png
 .. |Power Supply Component| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/PowerSupply.png
