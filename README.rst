@@ -130,6 +130,10 @@ Change History
 
   * Added Adva entityStateOper checking and /Status/Adva event class
 
+* 1.3
+
+  * Fixed bug that caused modelers to fail when opticalIfDiagTable is empty
+
 Known Issues
 ===========
 
