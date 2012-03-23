@@ -107,5 +107,8 @@ class FSP3000R7PowerSupply(DeviceComponent, ManagedEntity, ZenPackPersistence):
     def monitored(self):
         return True
 
+    def manage_deleteComponent(self):
+        self.getPrimaryParent()._delObject(self.id)
+
 
 InitializeClass(FSP3000R7PowerSupply)

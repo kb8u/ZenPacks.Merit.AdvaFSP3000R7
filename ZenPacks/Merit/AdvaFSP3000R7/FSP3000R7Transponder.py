@@ -110,5 +110,8 @@ class FSP3000R7Transponder(DeviceComponent, ManagedEntity, ZenPackPersistence):
 #            return False
         return True
 
+    def manage_deleteComponent(self):
+        self.getPrimaryParent()._delObject(self.id)
+
 
 InitializeClass(FSP3000R7Transponder)
