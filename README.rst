@@ -134,6 +134,10 @@ Change History
 
   * Fixed bug that caused modelers to fail when opticalIfDiagTable is empty
 
+* 1.4
+
+  * Fixed bug that prevented components from being deleted
+
 Known Issues
 ===========
 
