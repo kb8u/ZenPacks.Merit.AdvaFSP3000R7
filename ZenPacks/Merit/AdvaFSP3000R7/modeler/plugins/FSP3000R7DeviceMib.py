@@ -39,6 +39,7 @@ class FSP3000R7DeviceMib(SnmpPlugin):
         '.1.2.': 'entityContainedIn',
         '.1.5.': 'entityIndexAid',
         '.1.7.': 'entityAssignmentState',
+        '.1.8.': 'entityEquipmentState',
     }
 
     opticalIfDiagcolumns = { '.1.3.': 'opticalIfDiagInputPower' }

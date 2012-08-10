@@ -101,7 +101,12 @@ class FSP3000R7MibCommon(SnmpPlugin):
         for entityIndex, inventoryUnitName in inventoryTable.items():
             entityIndex_str = str(entityIndex)
             if self.__model_match(inventoryUnitName['inventoryUnitName'],
-                            self.componentModels):
+                            self.componentModels) \
+              and entityIndex in entityTable \
+              and 'entityAssignmentState' in entityTable[entityIndex] \
+              and 'entityEquipmentState' in entityTable[entityIndex] \
+              and entityTable[entityIndex]['entityAssignmentState'] == 1 \
+              and entityTable[entityIndex]['entityEquipmentState'] == 1:
                 om = self.objectMap()
                 om.EntityIndex = int(entityIndex)
                 om.inventoryUnitName = inventoryUnitName['inventoryUnitName']
@@ -117,29 +122,35 @@ class FSP3000R7MibCommon(SnmpPlugin):
 
                 # Now find sub-organizers that respond to OPR
                 if opticalIfDiagTable in [False,NoneType]:
-                  continue
+                    continue
                 if entityIndex_str not in containsModules:
-                  continue
+                    continue
                 # EntityIndex's with valid responses to opticalIfDiagTable
                 opr_responders = []
                 self.__get_opr_responders(opr_responders,entityIndex_str,containsModules,opticalIfDiagTable)
 
                 for entityIndex in opr_responders:
-                  om = self.objectMap()
-                  om.EntityIndex = int(entityIndex)
-                  if entityIndex in inventoryUnitName:
-                    om.inventoryUnitName = inventoryUnitName[entityIndex]['inventoryUnitName']
-                  else:
-                    om.inventoryUnitName = 'Subsystem'
-                  om.entityIndexAid = entityTable[entityIndex]['entityIndexAid']
-                  om.sortKey = self.__make_sort_key(om.entityIndexAid)
-                  om.entityAssignmentState = entityTable[entityIndex]['entityAssignmentState']
-                  om.id = self.prepId(om.entityIndexAid)
-                  om.title = om.entityIndexAid
-                  om.snmpindex = int(entityIndex)
-                  log.info('Found component at: %s inventoryUnitName: %s',om.entityIndexAid, om.inventoryUnitName)
+                    # skip non-production components.  entityEquipmentState is 0
+                    # (undefined) for sub-organizers so don't check it here.
+                    if not (entityIndex in entityTable \
+                      and 'entityAssignmentState' in entityTable[entityIndex] \
+                      and entityTable[entityIndex]['entityAssignmentState']==1):
+                        continue;
+                    om = self.objectMap()
+                    om.EntityIndex = int(entityIndex)
+                    if entityIndex in inventoryUnitName:
+                        om.inventoryUnitName = inventoryUnitName[entityIndex]['inventoryUnitName']
+                    else:
+                        om.inventoryUnitName = 'Subsystem'
+                    om.entityIndexAid=entityTable[entityIndex]['entityIndexAid']
+                    om.sortKey = self.__make_sort_key(om.entityIndexAid)
+                    om.entityAssignmentState = entityTable[entityIndex]['entityAssignmentState']
+                    om.id = self.prepId(om.entityIndexAid)
+                    om.title = om.entityIndexAid
+                    om.snmpindex = int(entityIndex)
+                    log.info('Found component at: %s inventoryUnitName: %s',om.entityIndexAid, om.inventoryUnitName)
 
-                  rm.append(om)
+                    rm.append(om)
 
         return rm
 
