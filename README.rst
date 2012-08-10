@@ -138,6 +138,10 @@ Change History
 
   * Fixed bug that prevented components from being deleted
 
+* 1.5
+
+  * Only adds components that are provisioned
+
 Known Issues
 ===========
 
