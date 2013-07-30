@@ -186,6 +186,6 @@ and 'VCH-1-7-N1' -> '  1  7VCH N1'"""
         a = entityIndexAid.split('-',4)
         if len(a) < 3:
             return '000000000'
-        if entityIndexAid.startswith('MOD-'):
+        if entityIndexAid.startswith('MOD-') or entityIndexAid.startswith('FAN-'):
             return "%03s%03s000000" % (a[1],a[2])
         return "%03s%03s%03s%03s" % (a[1],a[2],a[0],a[3])
