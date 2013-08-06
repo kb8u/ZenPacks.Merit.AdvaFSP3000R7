@@ -22,4 +22,4 @@ class FSP3000R7OSCMib(FSP3000R7MibCommon):
     modname = "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OSC"
     relname = "FSP3000R7Osc"
 
-    componentModels = ['OSCM-PN']
+    componentModels = [ 'OSCM-PN', 'OSCM-V#1630', '2OSCM-V#1630']

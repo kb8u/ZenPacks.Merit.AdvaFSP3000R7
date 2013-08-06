@@ -22,4 +22,4 @@ class FSP3000R7NCUMib(FSP3000R7MibCommon):
     modname = "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7NCU"
     relname = "FSP3000R7Ncu"
 
-    componentModels = ['NCU-II']
+    componentModels = [ 'NCU-II', 'NCU-II-P', 'NCU' ]

@@ -24,4 +24,4 @@ class FSP3000R7FanMib(FSP3000R7MibCommon):
     relname  = "fans"
     compname = "hw"
 
-    componentModels = [ 'FAN/9HU','FAN/PLUG-IN']
+    componentModels = [ 'FAN/9HU','FAN/PLUG-IN', 'FAN/1HU' ]

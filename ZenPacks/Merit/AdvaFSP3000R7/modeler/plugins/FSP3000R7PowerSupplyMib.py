@@ -24,4 +24,5 @@ class FSP3000R7PowerSupplyMib(FSP3000R7MibCommon):
 
     componentModels = ['PSU/7HU-DC',   'PSU/7HU-AC',   'PSU/7HU-R-DC',
                        'PSU/7HU-DC-HP','PSU/7HU-AC-HP','PSU/7HU-AC-HP',
-                       'PSU/9HU-DC',   'PSU/1HU-R-AC', 'PSU/7HU-AC-800' ]
+                       'PSU/9HU-DC',   'PSU/1HU-R-AC', 'PSU/7HU-AC-800',
+                       'PSU/7HU-R-DC-HP', 'PSU/1HU-R-AC-200' ]
