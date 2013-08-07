@@ -19,9 +19,11 @@ the current value.
 set_optical_rx_threshold.py <device>
 '''
 
+import os
 import sys
 import re
 import Globals
+import subprocess
 from Products.ZenUtils.ZenScriptBase import ZenScriptBase
 from transaction import commit
 
@@ -48,7 +50,7 @@ for component in device.getMonitoredComponents():
     # don't set thresholds on containers
     if re.search('^MOD-\d',component.id,flags=re.IGNORECASE):
         continue
-    component.makeLocalRRDTemplate('CiscoPluggableOpticsSensorDbm')
+    component.makeLocalRRDTemplate(component.__class__.__name__)
     template = component.getRRDTemplateByName(component.__class__.__name__)
     if template is None:
         continue
@@ -64,16 +66,31 @@ for component in device.getMonitoredComponents():
         continue
 
     # get current value from rrd
-### broken, next line causes error.  Try reading rrdfile with exec
+### BUG: next line throws exception (due to spaces in string & bug in library?)
+### workaround is to get the value from the rrdfile with rrdtool
 #    current = component.getRRDValue('Optical input power_Optical input power')
-
-    rrdfile =component.getRRDFileName('Optical input power_Optical input power')
-    exec('rrdtool lastupdate $ZENHOME/perf/%s' % rrdfile)  or somethin.....
-
-    if current is None:
+    rrdfile = os.environ['ZENHOME'] + '/perf/' + \
+        component.getRRDFileName('Optical input power_Optical input power')
+    sp = subprocess.Popen(['rrdtool','lastupdate', rrdfile],
+                          stdout = subprocess.PIPE,
+                          stderr = subprocess.PIPE)
+    out,err = sp.communicate()
+    if err:
         print '%s threshold not changed:' % component.id
         print 'rrd file is missing or too new. Try again in 10 minutes.'
         continue
+    current = out.split()[-1]
+    if current is None:
+        print '%s threshold not changed:' % component.id
+        print "Couldn't read value from rrd file."
+        continue
+    try:
+        current = float(current)
+    except ValueError:
+        print '%s threshold not changed:' % component.id
+        print "Couldn't read value from rrd file."
+        continue
+
     new_minval = current - 10.0
     threshold.minval = str(new_minval)
     threshold.enabled = True
