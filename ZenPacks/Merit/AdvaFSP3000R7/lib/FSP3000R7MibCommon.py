@@ -18,7 +18,6 @@ Zenoss.
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableMap, GetMap
 from Products.DataCollector.plugins.DataMaps import ObjectMap
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Channels import Channels
-from types import NoneType
 import cPickle
 import time
 
@@ -42,7 +41,7 @@ class FSP3000R7MibCommon(SnmpPlugin):
         getdata = {}
         getdata['setHWTag'] = False
         getdata, tabledata = results
-        if getdata['setHWTag'] in [False,NoneType]:
+        if not getdata['setHWTag']:
             log.info("Couldn't get system name from Adva shelf.")
             return
         if getdata['setHWTag'] == '':
@@ -71,16 +70,16 @@ class FSP3000R7MibCommon(SnmpPlugin):
             log.warn("Cached SNMP doesn't exist or is older than 15 minutes.  You must include the modeler plugin FSP3000R7Device")
             return
 
-        if inventoryTable in [False,NoneType]:
+        if not inventoryTable:
             log.warn( 'No SNMP inventoryTable response from %s for the %s plugin', device.id, self.name() )
             return;
-        if entityTable in [False,NoneType]:
+        if not entityTable:
             log.warn( 'No SNMP entityTable response from %s for the %s plugin', device.id, self.name() )
             return;
         else:
             log.debug('SNMP entityTable and inventoryTable responses received')
         # not all modules will respond to opticalIfDiagTable so don't return 
-        if opticalIfDiagTable in [False,NoneType]:
+        if not opticalIfDiagTable:
             log.warn( 'No SNMP opticalIfDiagTable response from %s for the %s plugin', device.id, self.name() )
         else:
             log.debug('SNMP opticalIfDiagTable and inventoryTable responses received')
@@ -121,7 +120,7 @@ class FSP3000R7MibCommon(SnmpPlugin):
                 rm.append(om)
 
                 # Now find sub-organizers that respond to OPR
-                if opticalIfDiagTable in [False,NoneType]:
+                if not opticalIfDiagTable:
                     continue
                 if entityIndex_str not in containsModules:
                     continue
