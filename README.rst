@@ -15,6 +15,9 @@ is graphed.  Most blade types will be detected when modeling a system.  The five
 severity levels used in Adva's FSP Network Manager are mapped to the five
 severity levels in Zenoss.
 
+Also included is a script to set a threshold for monitoring of receive optical
+signal levels 3 dBm below the current value.
+
 Zenpack contents
 ================
 The ZenPack has the following:
@@ -61,6 +64,15 @@ Event Class mapping
 * Well over two hundred Event Class Mappings for Adva SNMP traps in sensible event classes.
 * Event severities match Adva's levels
 
+Command
+------
+
+- Update_optical_power_threshold
+Create rrd template local copy and/or update the threshold for receive
+optical power on amplifiers, transponders, OSCs and ROADMs so that they will
+generate an Error level alert if the optical signal degrades 3 dB from
+the current value.
+
 Requirements
 ============
 
@@ -77,10 +89,10 @@ Normal Installation (packaged egg)
 Installation from the Zenoss web interface may fail on especially slow systems
 due to time out issues.  If this happens, try installing from the command line:
 
-Download the appropriate package for your Zenoss version from the list
-below.
+Download the appropriate package for your Zenoss version from the Zenoss
+Zenpack site:
 
-* Zenoss 3.0+ `Latest Package for Python 2.6`_
+* Zenoss 3.0+ `Latest Package`_
   
 Then copy it to your Zenoss server and run the following commands as the zenoss
 user::
@@ -142,6 +154,11 @@ Change History
 
   * Only adds components that are provisioned
 
+* 1.6
+
+  * Added modeling of new hardware (e.g. 100Gig).  Added threshold setting
+    command.
+
 Known Issues
 ===========
 
@@ -155,6 +172,9 @@ Known Issues
   when the device is deleted from zenoss.  The Adva system must have a name
   or modeling may fail.  The file name is of the form:
   /tmp/SYSTEM-NAME.Adva_inventory_SNMP.pickle where
+
+* All traps do not have a corresponding event class; traps added to Adva
+  version 11.2.3 from 10.1.4 have not been added.
 
 
 Screenshots
@@ -177,7 +197,7 @@ EventClass Mappings
 
 .. External References Below. Nothing Below This Line Should Be Rendered
 
-.. _Latest Package for Python 2.6: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/downloads
+.. _Latest Package: http://wiki.zenoss.org/ZenPack:Adva_FSP3000R7
 
 .. |Device Overview| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/DeviceOverview.png
 .. |Power Supply Component| image:: https://github.com/kb8u/ZenPacks.Merit.AdvaFSP3000R7/raw/master/screenshots/PowerSupply.png
