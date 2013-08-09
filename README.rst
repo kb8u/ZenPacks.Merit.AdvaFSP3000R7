@@ -67,7 +67,7 @@ Event Class mapping
 Command
 ------
 
-- Update_optical_power_threshold
+- update_Adva_optical_power_threshold
 Create rrd template local copy and/or update the threshold for receive
 optical power on amplifiers, transponders, OSCs and ROADMs so that they will
 generate an Error level alert if the optical signal degrades 3 dB from
