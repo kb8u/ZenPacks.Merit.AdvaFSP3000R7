@@ -12,8 +12,8 @@
 
 usage = '''
 Create rrd template local copy and/or update the threshold for receive
-optical power on all transponders, amplifiers and OSCs so that they will
-generate a Error level alert if the optical signal degrades 1 dB from
+optical power on all transponders, amplifiers, ROADMs and OSCs so that they
+will generate an Error level alert if the optical signal degrades 3 dB from
 the current value.
 
 set_optical_rx_threshold.py <device>
@@ -43,7 +43,8 @@ if device is None:
     sys.exit()
 
 for component in device.getMonitoredComponents():
-    if component.__class__.__name__ not in [ 'FSP3000R7Amplifier',
+    if component.__class__.__name__ not in [ 'FSP3000R7Roadm',
+                                             'FSP3000R7Amplifier',
                                              'FSP3000R7Transponder',
                                              'FSP3000R7OSC' ]:
         continue
@@ -91,7 +92,7 @@ for component in device.getMonitoredComponents():
         print "Couldn't read value from rrd file."
         continue
 
-    new_minval = current - 10.0
+    new_minval = current - 30.0
     threshold.minval = str(new_minval)
     threshold.enabled = True
 
