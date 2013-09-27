@@ -18,7 +18,7 @@ from Globals import DTMLFile
 from Globals import InitializeClass
 
 from Products.ZenRelations.RelSchema import *
-from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
+from Products.ZenModel.ZenossSecurity import ZEN_CHANGE_DEVICE
 from Products.ZenModel.ZenPackPersistence import ZenPackPersistence
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
@@ -55,28 +55,14 @@ class FSP3000R7PowerSupply(DeviceComponent, ManagedEntity, ZenPackPersistence):
                          "FSP3000R7PwrSupply")),
         )
 
-    factory_type_information = (
-        {
-            'id'             : 'FSP3000R7PowerSupply',
-            'meta_type'      : 'FSP3000R7PowerSupply',
-            'description'    : """Power supply info""",
-            'product'        : 'AdvaFSP3000R7',
-            'immediate_view' : 'viewGraphs',
-            'actions'        :
-            (
-                { 'id'            : 'perfConf'
-                , 'name'          : 'Template'
-                , 'action'        : 'objTemplates'
-                , 'permissions'   : (ZEN_CHANGE_SETTINGS, )
-                },
-                { 'id'            : 'viewHistory'
-                , 'name'          : 'Modifications'
-                , 'action'        : 'viewHistory'
-                , 'permissions'   : (ZEN_VIEW,)
-                },
-            )
-          },
-        )
+    factory_type_information = ({
+        'actions': ({
+            'id': 'perfConf',
+            'name': 'Template',
+            'action': 'objTemplates',
+            'permissions': (ZEN_CHANGE_DEVICE,),
+            },),
+        },)
 
     isUserCreatedFlag = True
 
