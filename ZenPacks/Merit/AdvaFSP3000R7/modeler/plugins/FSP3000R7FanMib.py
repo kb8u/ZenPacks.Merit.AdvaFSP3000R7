@@ -20,7 +20,7 @@ class FSP3000R7FanMib(FSP3000R7MibCommon):
     """Map Adva FSP3000R7 Shelf fan modules."""
 
     maptype  = "FSP3000R7FanMap"
-    modname = "Products.ZenModel.Fan"
+    modname = "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Fan"
     relname  = "fans"
     compname = "hw"
 
