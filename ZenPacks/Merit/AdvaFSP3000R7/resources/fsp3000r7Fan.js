@@ -22,8 +22,7 @@ ZC.FSP3000R7FanPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'usesMonitorAttribute'},
                 {name: 'monitor'},
                 {name: 'monitored'},
-                {name: 'status'},
-                {name: 'inventoryUnitName'}
+                {name: 'status'}
             ],
             columns: [{
                 id: 'severity',
@@ -37,12 +36,6 @@ ZC.FSP3000R7FanPanel = Ext.extend(ZC.ComponentGridPanel, {
                 header: _t('Name'),
                 sortable: true,
                 width: 200
-            },{
-                id: 'inventoryUnitName',
-                dataIndex: 'inventoryUnitName',
-                header: _t('Model'),
-                sortable: true,
-                width: 400
             },{
                 id: 'monitored',
                 dataIndex: 'monitored',

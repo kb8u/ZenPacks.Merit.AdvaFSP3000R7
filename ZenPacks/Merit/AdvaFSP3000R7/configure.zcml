@@ -92,5 +92,18 @@
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
             permission="zope2.Public" />
 
+        <!-- Fan -->
+        <adapter
+            factory=".info.FanInfo"
+            for=".FSP3000R7Fan.FSP3000R7Fan"
+            provides=".interfaces.IFanInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Fan"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Fan.js"
+            weight="10"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
     </configure>
 </configure>

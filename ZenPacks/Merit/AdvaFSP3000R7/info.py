@@ -46,3 +46,6 @@ class TransponderInfo(ComponentInfo):
 class NCUInfo(ComponentInfo):
     implements(interfaces.INCUInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
+
+class FanInfo(ComponentInfo):
+    implements(interfaces.IFanInfo)

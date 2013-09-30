@@ -20,7 +20,7 @@ from Globals import InitializeClass
 
 from Products.ZenRelations.RelSchema import *
 from Products.ZenModel.ZenPackPersistence import ZenPackPersistence
-from Products.ZenModel.ZenossSecurity import ZEN_VIEW, ZEN_CHANGE_SETTINGS
+from Products.ZenModel.ZenossSecurity import ZEN_CHANGE_DEVICE
 
 from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
@@ -58,28 +58,14 @@ class FSP3000R7Amplifier(DeviceComponent, ManagedEntity, ZenPackPersistence):
                          "FSP3000R7Amp")),
         )
 
-    factory_type_information = (
-        {
-          'id'             : 'FSP3000R7Amplifier',
-          'meta_type'      : 'FSP3000R7Amplifier',
-          'description'    : """Amplifier info""",
-          'product'        : 'AdvaFSP3000R7',
-          'immediate_view' : 'objTemplates',
-          'actions'        :
-          (
-              { 'id'            : 'perfConf',
-                'name'          : 'Amplifier Template',
-                'action'        : 'objTemplates',
-                'permissions'   : (ZEN_CHANGE_SETTINGS, )
-              },
-              { 'id'            : 'viewHistory',
-                'name'          : 'Modifications',
-                'action'        : 'viewHistory',
-                'permissions'   : (ZEN_VIEW, )
-              },
-          )
-         },
-        )
+    factory_type_information = ({
+        'actions': ({
+            'id': 'perfConf',
+            'name': 'Template',
+            'action': 'objTemplates',
+            'permissions': (ZEN_CHANGE_DEVICE,),
+            },),
+        },)
 
     isUserCreatedFlag = True
 
