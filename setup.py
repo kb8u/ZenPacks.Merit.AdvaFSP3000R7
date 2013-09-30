@@ -3,9 +3,9 @@
 # or saved.  Do not modify them directly here.
 # NB: PACKAGES is deprecated
 NAME = "ZenPacks.Merit.AdvaFSP3000R7"
-VERSION = "1.6.0"
+VERSION = "1.7.0"
 AUTHOR = "Russell Dwarshuis"
-LICENSE = ""
+LICENSE = "GPLv2"
 NAMESPACE_PACKAGES = ['ZenPacks', 'ZenPacks.Merit']
 PACKAGES = ['ZenPacks', 'ZenPacks.Merit', 'ZenPacks.Merit.AdvaFSP3000R7']
 INSTALL_REQUIRES = []

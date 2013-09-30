@@ -159,6 +159,11 @@ Change History
   * Added modeling of new hardware (e.g. 100Gig).  Added threshold setting
     command.
 
+* 1.7
+
+  * Fixed bugs with component templates showing up twice, fan components not
+    deleting through GUI in Zenoss 4.3.2
+
 Known Issues
 ===========
 
@@ -171,7 +176,7 @@ Known Issues
 * SNMP cache file needs to be created in /tmp.  The file will not be removed
   when the device is deleted from zenoss.  The Adva system must have a name
   or modeling may fail.  The file name is of the form:
-  /tmp/SYSTEM-NAME.Adva_inventory_SNMP.pickle where
+  /tmp/SYSTEM-NAME.Adva_inventory_SNMP.pickle 
 
 * All traps do not have a corresponding event class; traps added to Adva
   version 11.2.3 from 10.1.4 have not been added.
