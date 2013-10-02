@@ -83,7 +83,7 @@ class FSP3000R7DeviceMib(SnmpPlugin):
             return
 
 
-        cache_file_name = '/tmp/' + getdata['setHWTag'] + '.Adva_inventory_SNMP.pickle'
+        cache_file_name = '/tmp/%s.Adva_inventory_SNMP.pickle' % device.id
         inventoryTable     = tabledata.get('inventoryTableEntry')
         entityTable        = tabledata.get('entityTableEntry')
         opticalIfDiagTable = tabledata.get('opticalIfDiagTableEntry')
