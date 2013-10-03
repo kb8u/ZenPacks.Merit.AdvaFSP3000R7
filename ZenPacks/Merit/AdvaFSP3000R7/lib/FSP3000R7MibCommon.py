@@ -16,54 +16,63 @@ slowly that modeling times out in Zenoss.
 """
 
 from Products.ZenModel.ZenPackPersistence import ZenPackPersistence
-from Products.DataCollector.plugins.CollectorPlugin import PythonPlugin
+from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableMap, GetMap
 from Products.DataCollector.plugins.DataMaps import ObjectMap, RelationshipMap
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Channels import Channels
 import cPickle
 import time
 
-class FSP3000R7MibCommon(PythonPlugin):
 
-    def collect(self, device, log):
-        """ read pickle file in /tmp from recent run of device modeler.
-            Returns False if there is a problem. """
-        log.info('collecting  %s for device %s', self.name(), device.id)
+class FSP3000R7MibCommon(SnmpPlugin):
 
-        results = {}
-        results['inventoryTable'] = False
-        results['entityTable'] = False
-        results['opticalIfDiagTable'] = False
+    cache_file_name = '/tmp/%s.Adva_inventory_SNMP.pickle' % self.manageIp
+    # try to get snmp table from cache file first. Failing that, walk device
+    # and save to cache file.
+    snmpGetTableMaps = __read_cache()
+    if not snmpGetTableMaps:
+        inventoryTablecolumns = { '.1.1.': 'inventoryUnitName' }
+        entityTablecolumns = {
+            '.1.2.': 'entityContainedIn',
+            '.1.5.': 'entityIndexAid',
+            '.1.7.': 'entityAssignmentState',
+            '.1.8.': 'entityEquipmentState' }
+        opticalIfDiagcolumns = { '.1.3.': 'opticalIfDiagInputPower' }
 
-        cache_file_time = 0
-        cache_file_name = '/tmp/%s.Adva_inventory_SNMP.pickle' % device.id
-
-        # use cached SNMP results for component modeling
-        bad_cache = 0
+        # GetTableMap gets tabular data
+        snmpGetTableMaps = (
+            GetTableMap('inventoryTableEntry',
+                        '1.3.6.1.4.1.2544.2.5.5.1',
+                        inventoryTablecolumns),
+            GetTableMap('entityTableEntry',
+                        '1.3.6.1.4.1.2544.2.5.5.2',
+                        entityTablecolumns),
+            GetTableMap('opticalIfDiagTableEntry',
+                        '1.3.6.1.4.1.2544.1.11.2.4.3.5',
+                        opticalIfDiagcolumns) )
+        # save results to cache file
         try:
-            cache_file = open(cache_file_name, 'r')
-            results['inventoryTable'] = cPickle.load(cache_file)
-            results['entityTable'] = cPickle.load(cache_file)
-            results['opticalIfDiagTable'] = cPickle.load(cache_file)
-            cache_file_time = cPickle.load(cache_file)
+            cache_file = open(cache_file_name, 'w')
+            cache_file_time = time.time()
+            cPickle.dump(cache_file,cache_file_time)
+            cPickle.dump(cache_file,snmpGetTableMaps)
             cache_file.close()
         except IOError,cPickle.PickleError:
-            log.debug('Could not open or read ' + cache_file_name)
-            bad_cache = 1
+            log.warn("Couldn't store SNMP data in " + cache_file_name)
 
-        if bad_cache or cache_file_time < time.time() - 900:
-            log.warn("Cached SNMP doesn't exist or is older than 15 minutes.  You must include the modeler plugin FSP3000R7Device")
-            return False
+
+    def process(self, device, results, log):
+        log.info('processing  %s for device %s', self.name(), device.id)
 
         if not results['inventoryTable']:
             log.warn(
                 'No SNMP inventoryTable response from %s for the %s plugin',
                 device.id, self.name() )
-            return False
+            return
         if not results['entityTable']:
             log.warn(
                 'No SNMP entityTable response from %s for the %s plugin',
                 device.id, self.name() )
-            return False
+            return
         else:
             log.debug('SNMP entityTable and inventoryTable responses received')
         # not all modules will respond to opticalIfDiagTable so don't return 
@@ -74,12 +83,6 @@ class FSP3000R7MibCommon(PythonPlugin):
         else:
             log.debug(
                 'SNMP opticalIfDiagTable and inventoryTable responses received')
-
-        return results
-
-
-    def process(self, device, results, log):
-        """collect snmp information for components from this device"""
 
         # nothing to process if collect didn't has a problem
         if results is False:
@@ -207,3 +210,21 @@ class FSP3000R7MibCommon(PythonPlugin):
         or entityIndexAid.startswith('FAN-'):
             return "%03s%03s000000" % (a[1],a[2])
         return "%03s%03s%03s%03s" % (a[1],a[2],a[0],a[3])
+
+
+    def __read_cache(self):
+        """Try to read cache file of snmp table walk.  Return False on fail"""
+        cache_file_time = 0
+        try:
+            cache_file = open(self.cache_file_name, 'w')
+            snmpGetTableMaps = cPickle.load(cache_file)
+            cache_file_time = cPickle.load(cache_file)
+            cache_file.close()
+        except IOError,cPickle.PickleError:
+            pass
+
+        if cache_file_time < time.time() - 900:
+            log.info("Cache file is missing or is not current.")
+            return False
+
+        return snmpGetTableMaps
