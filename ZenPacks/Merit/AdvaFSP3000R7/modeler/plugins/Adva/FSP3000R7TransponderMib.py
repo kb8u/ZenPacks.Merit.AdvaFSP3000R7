@@ -23,10 +23,11 @@ class FSP3000R7TransponderMib(FSP3000R7MibCommon):
     relname = "FSP3000R7Trans"
 
     componentModels = [ # Core Type channel modules
-                        '2WCC-PCN-10G',
                         'WCC-TN-40G-L#DC',
                         '4TCC-PCTN-10G+40G-L#DC',
+                        'WCC-PCTN-100GB',
                         'WCC-PCTN-100GA',
+                        '10TCC-PCTN-10G+100GB',
                         'WCC-PCTN-10G-LN#DC',
                         'WCC-PCTN-10G-V#DC',
                         'WCC-PCTN-10G-V#DL',
@@ -43,12 +44,15 @@ class FSP3000R7TransponderMib(FSP3000R7MibCommon):
                         '10TCC-PCTN-4GUS+10G-V#DC',
                         '10TCC-PCTN-4GUS+10G-V#DL',
                         '10TCC-PCN-2G7US+10G',
+                        '10WXC-PCN-10G',
+                        '2WCC-PCN-10G',
                         '2TWCC-PCN-2G7U',
                         'WCC-PC1N-2G7U',
                         '4TCC-PCN-2G1U+2G5',
                         # Access Type Channel modules
                         '2PCA-PCN-10G',
                         '10PCA-PCN-1G3-10G',
+                        '10PCA-PCN-1G3+10G',
                         '2WCA-PCN-10G',
                         'WCA-PC-10G-V#',
                         '8TCA-PC-2G1U+10G-V#',
@@ -67,6 +71,8 @@ class FSP3000R7TransponderMib(FSP3000R7MibCommon):
                         '5TCE-PCTN-10GU+AES10G-LN#DC',
                         '5TCE-PCTN-10GU+AES10G-V#DC',
                         '5TCE-PCTN-10GU+AES10G-V#DL',
+                        '5TCE-PCTN-8GU+10GS-LN#DC',
+                        '5TCE-PCTN-8GU+10GS-V#DC',
                         '10TCE-PCN-10G+100G-GF',
                         '10TCE-PCN-10G+100G',
                         '8TCE-ESCON+2G5-V#',
