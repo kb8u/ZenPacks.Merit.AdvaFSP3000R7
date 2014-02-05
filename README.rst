@@ -179,7 +179,7 @@ Known Issues
   /tmp/SYSTEM-NAME.Adva_inventory_SNMP.pickle 
 
 * All traps do not have a corresponding event class; traps added to Adva
-  version 11.2.3 from 10.1.4 have not been added.
+  versions newer than 10.1.4 have not been added.
 
 
 Screenshots
