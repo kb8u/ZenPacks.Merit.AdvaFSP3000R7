@@ -50,6 +50,7 @@ class FSP3000R7DeviceMib(PythonPlugin):
         inventoryUnitNameOID = '1.3.6.1.4.1.2544.2.5.5.1.1.1'
         entityContainedInOID = '1.3.6.1.4.1.2544.2.5.5.2.1.2'
         entityIndexAidOID = '1.3.6.1.4.1.2544.2.5.5.2.1.5'
+        interfaceConfigIdentifierOID = '1.3.6.1.4.1.2544.1.11.2.4.3.1.1.1'
         entityAssignmentStateOID = '1.3.6.1.4.1.2544.2.5.5.2.1.7'
         entityEquipmentStateOID = '1.3.6.1.4.1.2544.2.5.5.2.1.8'
         opticalIfDiagInputPowerOID = '1.3.6.1.4.1.2544.1.11.2.4.3.5.1.3'
@@ -78,6 +79,13 @@ class FSP3000R7DeviceMib(PythonPlugin):
         raw_entityIndexAid = self.__snmpgettable(device,entityIndexAidOID)
         self.__make_cacheable('entityIndexAid',
                               raw_entityIndexAid,
+                              entityTable)
+
+        raw_interfaceConfigIdentifier = {}
+        raw_interfaceConfigIdentifier = \
+          self.__snmpgettable(device,interfaceConfigIdentifierOID)
+        self.__make_cacheable('interfaceConfigIdentifier',
+                              raw_interfaceConfigIdentifier,
                               entityTable)
 
         raw_entityAssignmentState = {}

@@ -36,6 +36,7 @@ class FSP3000R7Transponder(DeviceComponent, ManagedEntity, ZenPackPersistence):
     EntityIndex           = -1
     inventoryUnitName     = 'Not set by modeler'
     entityIndexAid        = 'Not set by modeler'
+    interfaceConfigId     = 'Not set by modeler'
     sortKey               = '000000000'
     entityAssignmentState = 'Not set by modeler'
 
@@ -46,6 +47,8 @@ class FSP3000R7Transponder(DeviceComponent, ManagedEntity, ZenPackPersistence):
         {'id':'inventoryUnitName',     'type':'string', 'mode':''},
         # human readable physical location of Transponder in shelf
         {'id':'entityIndexAid',        'type':'string', 'mode':''},
+        # link comments (interfaceConfigIdentifier)
+        {'id':'interfaceConfigId',     'type':'string', 'mode':''},
         # string used to sort names in GUI
         {'id':'sortKey',               'type':'string', 'mode':''},
         {'id':'entityAssignmentState', 'type':'string', 'mode':''},

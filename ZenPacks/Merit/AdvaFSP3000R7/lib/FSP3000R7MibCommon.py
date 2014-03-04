@@ -9,7 +9,7 @@ __doc__="""FSP3000R7MibCommon
 FSP3000R7MibCommon is a modeler base class to find components on an
 Adva FSP3000R7 system. It uses stored SNMP data from an Adva system in a
 file in /tmp so if there is more than one component to be modeled, the
-subsequent components will not have to get the same information over.
+subsequent components will not have to get the same information over and over.
 Without this, a system may respond so slowly that modeling times out in
 Zenoss.  The stored SNMP data is created by the Adva device modeler which
 must be run first."""
@@ -110,6 +110,8 @@ class FSP3000R7MibCommon(SnmpPlugin):
                 om = self.objectMap()
                 om.EntityIndex = int(entityIndex)
                 om.inventoryUnitName = inventoryUnitName['inventoryUnitName']
+                om.interfaceConfigId = \
+                    entityTable[entityIndex]['interfaceConfigIdentifier']
                 om.entityIndexAid = entityTable[entityIndex]['entityIndexAid']
                 om.sortKey = self.__make_sort_key(om.entityIndexAid)
                 om.entityAssignmentState = \
