@@ -36,7 +36,7 @@ class FSP3000R7Transponder(DeviceComponent, ManagedEntity, ZenPackPersistence):
     EntityIndex           = -1
     inventoryUnitName     = 'Not set by modeler'
     entityIndexAid        = 'Not set by modeler'
-    interfaceConfigId     = 'Not set by modeler'
+    interfaceConfigId     = ''
     sortKey               = '000000000'
     entityAssignmentState = 'Not set by modeler'
 

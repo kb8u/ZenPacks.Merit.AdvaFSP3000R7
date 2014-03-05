@@ -50,6 +50,9 @@ class ITransponderInfo(IComponentInfo):
     inventoryUnitName = schema.Text(title    = u"Model",
                                     readonly = True,
                                     group    = 'Details')
+    interfaceConfigId = schema.Text(title    = u"Comment",
+                                    readonly = True,
+                                    group    = 'Details')
 
 class INCUInfo(IComponentInfo):
     """ Info adapter for NCU component """

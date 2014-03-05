@@ -42,6 +42,7 @@ class RoadmInfo(ComponentInfo):
 class TransponderInfo(ComponentInfo):
     implements(interfaces.ITransponderInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
+    interfaceConfigId = ProxyProperty("interfaceConfigId")
 
 class NCUInfo(ComponentInfo):
     implements(interfaces.INCUInfo)
