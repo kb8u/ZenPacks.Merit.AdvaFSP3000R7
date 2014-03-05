@@ -164,6 +164,10 @@ Change History
   * Fixed bugs with component templates showing up twice, fan components not
     deleting through GUI in Zenoss 4.3.2
 
+* 1.8
+
+  * Added comments configured on components to GUI
+
 Known Issues
 ===========
 
