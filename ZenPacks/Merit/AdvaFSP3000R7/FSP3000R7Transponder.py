@@ -92,11 +92,10 @@ class FSP3000R7Transponder(DeviceComponent, ManagedEntity, ZenPackPersistence):
 
     def monitored(self):
         """Monitor transponder if it's provisioned (same thing as assigned)"""
-# Not sure why this always returns False.  It's cosmetic so force True
-#        if self.entityAssignmentState == '1':
-#            return True
-#        else:
-#            return False
+        if self.entityAssignmentState:
+            return True
+        else:
+            return False
         return True
 
     def manage_deleteComponent(self):

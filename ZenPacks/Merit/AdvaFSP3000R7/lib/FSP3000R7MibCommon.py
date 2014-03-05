@@ -110,8 +110,9 @@ class FSP3000R7MibCommon(SnmpPlugin):
                 om = self.objectMap()
                 om.EntityIndex = int(entityIndex)
                 om.inventoryUnitName = inventoryUnitName['inventoryUnitName']
-                om.interfaceConfigId = \
-                    entityTable[entityIndex]['interfaceConfigIdentifier']
+                if 'interfaceConfigIdentifier' in entityTable[entityIndex]:
+                    om.interfaceConfigId = \
+                        entityTable[entityIndex]['interfaceConfigIdentifier']
                 om.entityIndexAid = entityTable[entityIndex]['entityIndexAid']
                 om.sortKey = self.__make_sort_key(om.entityIndexAid)
                 om.entityAssignmentState = \
@@ -150,6 +151,9 @@ class FSP3000R7MibCommon(SnmpPlugin):
                             inventoryUnitName[entityIndex]['inventoryUnitName']
                     else:
                         om.inventoryUnitName = 'Subsystem'
+                    if 'interfaceConfigIdentifier' in entityTable[entityIndex]:
+                        om.interfaceConfigId = \
+                           entityTable[entityIndex]['interfaceConfigIdentifier']
                     om.entityIndexAid=entityTable[entityIndex]['entityIndexAid']
                     om.sortKey = self.__make_sort_key(om.entityIndexAid)
                     om.entityAssignmentState = \
