@@ -26,6 +26,7 @@ from ZenPacks.Merit.AdvaFSP3000R7 import interfaces
 class OSCInfo(ComponentInfo):
     implements(interfaces.IOSCInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
+    interfaceConfigId = ProxyProperty("interfaceConfigId")
 
 class PowerSupplyInfo(ComponentInfo):
     implements(interfaces.IPowerSupplyInfo)
@@ -34,10 +35,12 @@ class PowerSupplyInfo(ComponentInfo):
 class AmplifierInfo(ComponentInfo):
     implements(interfaces.IAmplifierInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
+    interfaceConfigId = ProxyProperty("interfaceConfigId")
 
 class RoadmInfo(ComponentInfo):
     implements(interfaces.IRoadmInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
+    interfaceConfigId = ProxyProperty("interfaceConfigId")
 
 class TransponderInfo(ComponentInfo):
     implements(interfaces.ITransponderInfo)
@@ -47,6 +50,7 @@ class TransponderInfo(ComponentInfo):
 class NCUInfo(ComponentInfo):
     implements(interfaces.INCUInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
+    interfaceConfigId = ProxyProperty("interfaceConfigId")
 
 class FanInfo(ComponentInfo):
     implements(interfaces.IFanInfo)

@@ -19,6 +19,7 @@ ZC.FSP3000R7OSCPanel = Ext.extend(ZC.ComponentGridPanel, {
                 {name: 'uid'},
                 {name: 'severity'},
                 {name: 'name'},
+                {name: 'interfaceConfigId'},
                 {name: 'usesMonitorAttribute'},
                 {name: 'monitor'},
                 {name: 'monitored'},
@@ -38,11 +39,17 @@ ZC.FSP3000R7OSCPanel = Ext.extend(ZC.ComponentGridPanel, {
                 sortable: true,
                 width: 200
             },{
+                id: 'interfaceConfigId',
+                dataIndex: 'interfaceConfigId',
+                header: _t('Comment'),
+                sortable: true,
+                width: 400
+            },{
                 id: 'inventoryUnitName',
                 dataIndex: 'inventoryUnitName',
                 header: _t('Model'),
                 sortable: true,
-                width: 400
+                width: 300
             },{
                 id: 'monitored',
                 dataIndex: 'monitored',
