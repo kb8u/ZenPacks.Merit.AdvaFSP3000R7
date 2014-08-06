@@ -17,7 +17,7 @@ must be run first."""
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableMap, GetMap
 from Products.DataCollector.plugins.DataMaps import ObjectMap
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Channels import Channels
-import cPickle
+from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibPickle import getCache
 import time
 import os
 
@@ -44,56 +44,13 @@ class FSP3000R7MibCommon(SnmpPlugin):
         if not getdata['setHWTag']:
             log.info("Couldn't get system name from Adva shelf.")
 
-        cache_file_name = '/tmp/%s.Adva_inventory_SNMP.pickle' % device.id
-
         inventoryTable = entityTable = opticalIfDiagTable = False
-        cache_file_time = 0
-
-        bad_cache = 0
-
-        try:
-            cache_file = open(cache_file_name, 'r')
-            inventoryTable = cPickle.load(cache_file)
-            entityTable = cPickle.load(cache_file)
-            opticalIfDiagTable = cPickle.load(cache_file)
-            cache_file_time = cPickle.load(cache_file)
-            cache_file.close()
-        except IOError,cPickle.PickleError:
-            log.debug('Could not open or read %s', cache_file_name)
-            bad_cache = 1
-
-        if bad_cache or cache_file_time < time.time() - 900:
-            log.warn("Cached SNMP doesn't exist or is older than 15 minutes. You must include the modeler plugin FSP3000R7Device")
-            return
-
-        if not inventoryTable:
-            log.warn('No SNMP inventoryTable response from %s for %s',
-                     device.id, self.name())
-            return;
-        if not entityTable:
-            log.warn('No SNMP entityTable response from %s for the %s plugin',
-                     device.id, self.name())
-            return;
-        else:
-            log.debug('SNMP entityTable and inventoryTable responses received')
-        # not all modules will respond to opticalIfDiagTable so don't return
-        if not opticalIfDiagTable:
-            log.warn(
-              'No SNMP opticalIfDiagTable response from %s for the %s plugin',
-              device.id, self.name())
-        else:
-            log.debug(
-                'SNMP opticalIfDiagTable and inventoryTable responses received')
-
-        # dictionary of lists of what submodules are contained
-        # in modules & submodules. Use strings to avoid key errors.
         containsModules = {}
-        for entityIndex, entityContainedIn in entityTable.items():
-            entityIndex_str = str(entityIndex)
-            entityContainedIn_str = str(entityContainedIn['entityContainedIn'])
-            if entityContainedIn_str not in containsModules:
-                containsModules[entityContainedIn_str] = []
-            containsModules[entityContainedIn_str].append(entityIndex_str)
+        gotCache, inventoryTable, entityTable, opticalIfDiagTable, \
+            containsModules = getCache(device.id, self.name(), log)
+        if not gotCache:
+            log.debug('Could not get cache for %s' % self.name())
+            return
 
         # relationship mapping
         rm = self.relMap()
