@@ -23,6 +23,10 @@ class FSP3000R7Device(Device,ZenPackPersistence):
     meta_type = 'FSP3000R7Device'
 
     _relations = Device._relations + (
+        ('FSP3000R7Mod',
+         ToManyCont(ToOne,
+                    'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Module',
+                    'FSP3000R7Dev')),
         ('FSP3000R7Amp',
          ToManyCont(ToOne,
                     'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Amplifier',
@@ -54,18 +58,6 @@ class FSP3000R7Device(Device,ZenPackPersistence):
         )
 
     factory_type_information = deepcopy(Device.factory_type_information)
-# Zenoss 2 could have additional tabs added by doing something like this:
-#    factory_type_information[0]['actions'] += (
-#            { 'id'              : 'Amplifiers',
-#              'name'            : 'Amplifiers',
-#              'action'          : 'FSP3000R7AmplifierDetail',
-#              'permissions'     : (ZEN_VIEW, ) },
-#            { 'id'              : 'Transponders',
-#              'name'            : 'Transponders',
-#              'action'          : 'FSP3000R7TransponderDetail','
-#              'permissions'     : (ZEN_VIEW, ) },
-# etc.
-#            )
 
     def __init__(self, *args, **kw):
         Device.__init__(self, *args, **kw)

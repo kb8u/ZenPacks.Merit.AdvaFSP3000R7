@@ -20,6 +20,7 @@ from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Channels import Channels
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibPickle import getCache
 import time
 import os
+from pprint import pformat
 
 
 # Use SNMP data from Device Modeler in a cache file.  Can't be a PythonPlugin
@@ -45,9 +46,9 @@ class FSP3000R7MibCommon(SnmpPlugin):
             log.info("Couldn't get system name from Adva shelf.")
 
         inventoryTable = entityTable = opticalIfDiagTable = False
-        containsModules = {}
+        containsOPRModules = {}
         gotCache, inventoryTable, entityTable, opticalIfDiagTable, \
-            containsModules = getCache(device.id, self.name(), log)
+            containsOPRModules = getCache(device.id, self.name(), log)
         if not gotCache:
             log.debug('Could not get cache for %s' % self.name())
             return
@@ -57,57 +58,49 @@ class FSP3000R7MibCommon(SnmpPlugin):
 
         for entityIndex, inventoryUnitName in inventoryTable.items():
             entityIndex_str = str(entityIndex)
-            if self.__model_match(inventoryUnitName['inventoryUnitName'],
-                            self.componentModels) \
+            invName = inventoryUnitName['inventoryUnitName']
+            modName = entityTable[entityIndex]['entityIndexAid']
+            # if model name matches, assigned and equiped:
+            if self.__model_match(invName, self.componentModels) \
               and entityIndex in entityTable \
               and 'entityAssignmentState' in entityTable[entityIndex] \
               and 'entityEquipmentState' in entityTable[entityIndex] \
               and entityTable[entityIndex]['entityAssignmentState'] == 1 \
               and entityTable[entityIndex]['entityEquipmentState'] == 1:
-                om = self.objectMap()
-                om.EntityIndex = int(entityIndex)
-                om.inventoryUnitName = inventoryUnitName['inventoryUnitName']
-                if 'interfaceConfigIdentifier' in entityTable[entityIndex]:
-                    om.interfaceConfigId = \
-                        entityTable[entityIndex]['interfaceConfigIdentifier']
-                om.entityIndexAid = entityTable[entityIndex]['entityIndexAid']
-                om.sortKey = self.__make_sort_key(om.entityIndexAid)
-                om.entityAssignmentState = \
-                    entityTable[entityIndex]['entityAssignmentState']
-                om.id = self.prepId(om.entityIndexAid)
-                om.title = om.entityIndexAid
-                om.snmpindex = int(entityIndex)
-                log.info('Found component at: %s inventoryUnitName: %s',
-                         om.entityIndexAid, om.inventoryUnitName)
-
-                rm.append(om)
+                # only add MOD name if power supply, fan or NCU
+                if self.__class__.__name__ in ['FSP3000R7PowerSupplyMib',
+                                               'FSP3000R7FanMib',
+                                               'FSP3000R7NCUMib']:
+                  om = self.objectMap()
+                  om.EntityIndex = int(entityIndex)
+                  om.inventoryUnitName = invName
+                  # Add comment (e.g. 'RAMAN from Niles') if one exists
+                  if 'interfaceConfigIdentifier' in entityTable[entityIndex]:
+                      om.interfaceConfigId = \
+                          entityTable[entityIndex]['interfaceConfigIdentifier']
+                  om.entityIndexAid = modName
+                  om.sortKey = self.__make_sort_key(modName)
+                  om.entityAssignmentState = \
+                      entityTable[entityIndex]['entityAssignmentState']
+                  om.id = self.prepId(modName)
+                  om.title = modName 
+                  om.snmpindex = int(entityIndex)
+                  log.info('Found component at: %s inventoryUnitName: %s',
+                           modName, invName)
+                  rm.append(om)
 
                 # Now find sub-organizers that respond to OPR
-                if not opticalIfDiagTable:
+                if modName not in containsOPRModules:
                     continue
-                if entityIndex_str not in containsModules:
-                    continue
-                # EntityIndex's with valid responses to opticalIfDiagTable
-                opr_responders = []
-                self.__get_opr_responders(opr_responders,
-                                          entityIndex_str,
-                                          containsModules,
-                                          opticalIfDiagTable)
-
-                for entityIndex in opr_responders:
-                    # skip non-production components. entityEquipmentState is 0
-                    # (undefined) for sub-organizers so don't check it here.
-                    if not (entityIndex in entityTable \
-                      and 'entityAssignmentState' in entityTable[entityIndex] \
+                for entityIndex in containsOPRModules[modName]:
+                    # skip non-production components
+                    if not (entityIndex in entityTable
+                      and 'entityAssignmentState' in entityTable[entityIndex]
                       and entityTable[entityIndex]['entityAssignmentState']==1):
                         continue;
                     om = self.objectMap()
                     om.EntityIndex = int(entityIndex)
-                    if entityIndex in inventoryUnitName:
-                        om.inventoryUnitName = \
-                            inventoryUnitName[entityIndex]['inventoryUnitName']
-                    else:
-                        om.inventoryUnitName = 'Subsystem'
+                    om.inventoryUnitName = invName
                     if 'interfaceConfigIdentifier' in entityTable[entityIndex]:
                         om.interfaceConfigId = \
                            entityTable[entityIndex]['interfaceConfigIdentifier']
@@ -137,25 +130,6 @@ class FSP3000R7MibCommon(SnmpPlugin):
             if inventoryUnitName == model:
                 return True
         return False
-
-
-    def __get_opr_responders(self,
-                             opr_responders,
-                             entityIndex_str,
-                             containsModules,
-                             opticalIfDiagTable):
-        """recursively walk containsModules looking for matches in opticalIfDiagTable"""
-        if entityIndex_str not in containsModules:
-            return
-        for entityIndex2 in containsModules[entityIndex_str]:
-            if entityIndex2 in opticalIfDiagTable:
-                # MIB says value of -65535 means not available or invalid
-                if opticalIfDiagTable[entityIndex2]['opticalIfDiagInputPower'] != -65535:
-                    opr_responders.append(entityIndex2)
-            self.__get_opr_responders(opr_responders,
-                                      entityIndex2,
-                                      containsModules,
-                                      opticalIfDiagTable)
 
 
     def __make_sort_key(self,entityIndexAid):
