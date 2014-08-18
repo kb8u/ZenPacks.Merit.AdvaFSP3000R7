@@ -15,6 +15,7 @@ FSP3000R7FanMib maps shelf fans on an Adva FSP3000R7 system
 """
 
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibCommon import FSP3000R7MibCommon
+from ZenPacks.Merit.AdvaFSP3000R7.lib.FanModels import FanModels
 
 class FSP3000R7FanMib(FSP3000R7MibCommon):
     """Map Adva FSP3000R7 Shelf fan modules."""
@@ -24,4 +25,4 @@ class FSP3000R7FanMib(FSP3000R7MibCommon):
     relname  = "fans"
     compname = "hw"
 
-    componentModels = [ 'FAN/9HU','FAN/PLUG-IN', 'FAN/Plug-In', 'FAN/1HU' ]
+    componentModels = FanModels

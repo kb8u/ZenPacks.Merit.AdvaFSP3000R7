@@ -16,10 +16,11 @@ FSP3000R7NCUMib maps NCU amplifiers on a FSP3000R7 system
 """
 
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibCommon import FSP3000R7MibCommon
+from ZenPacks.Merit.AdvaFSP3000R7.lib.NCUModels import NCUModels
 
 class FSP3000R7NCUMib(FSP3000R7MibCommon):
 
     modname = "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7NCU"
     relname = "FSP3000R7Ncu"
 
-    componentModels = [ 'NCU-II', 'NCU-II-P', 'NCU' ]
+    componentModels = NCUModels
