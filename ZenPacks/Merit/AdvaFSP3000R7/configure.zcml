@@ -14,6 +14,19 @@
             name="AdvaFSP3000R7"
             directory="resources" />
 
+        <!-- Module (container for other components) -->
+        <adapter
+            factory=".info.ModuleInfo"
+            for=".FSP3000R7Module.FSP3000R7Module"
+            provides=".interfaces.IModuleInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Module"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Module.js"
+            weight="10"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
         <!-- Network Element control Unit (NCU-II) -->
         <adapter
             factory=".info.NCUInfo"

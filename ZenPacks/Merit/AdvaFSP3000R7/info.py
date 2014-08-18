@@ -23,6 +23,9 @@ from Products.Zuul.decorators import info
 from ZenPacks.Merit.AdvaFSP3000R7 import interfaces
 
 
+class ModuleInfo(ComponentInfo):
+    implements(interfaces.IModuleInfo)
+
 class OSCInfo(ComponentInfo):
     implements(interfaces.IOSCInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")
