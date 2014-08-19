@@ -15,14 +15,15 @@ ZC.FSP3000R7ModulePanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'FSP3000R7Module',
-                fields: [
+            fields: [
                 {name: 'uid'},
                 {name: 'severity'},
                 {name: 'name'},
                 {name: 'usesMonitorAttribute'},
                 {name: 'monitor'},
                 {name: 'monitored'},
-                {name: 'status'}
+                {name: 'status'},
+                {name: 'inventoryUnitName'}
             ],
             columns: [{
                 id: 'severity',
@@ -36,6 +37,12 @@ ZC.FSP3000R7ModulePanel = Ext.extend(ZC.ComponentGridPanel, {
                 header: _t('Name'),
                 sortable: true,
                 width: 200
+            },{
+                id: 'inventoryUnitName',
+                dataIndex: 'inventoryUnitName',
+                header: _t('Model'),
+                sortable: true,
+                width: 400
             },{
                 id: 'monitored',
                 dataIndex: 'monitored',
@@ -53,7 +60,7 @@ ZC.FSP3000R7ModulePanel = Ext.extend(ZC.ComponentGridPanel, {
 });
 
 Ext.reg('FSP3000R7ModulePanel', ZC.FSP3000R7ModulePanel);
-ZC.registerName('FSP3000R7Module', _t('Shelf Module'), _t('Shelf Modules'));
+ZC.registerName('FSP3000R7Module', _t('Module'), _t('Module'));
 })();
 
 

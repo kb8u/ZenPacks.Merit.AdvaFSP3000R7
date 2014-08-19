@@ -31,29 +31,6 @@ class FSP3000R7Module(FSP3000R7Component):
                    ToOne(ToManyCont,
                          "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Device",
                          "FSP3000R7Mod")),)
-#                  ("FSP3000R7Mod",
-#                   ToOne(ToManyCont,
-#                         "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Module",
-#                         "FSP3000R7Mod")),
-#                  ("FSP3000R7Amp",
-#                   ToOne(ToManyCont,
-#                         "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Amplifier",
-#                         "FSP3000R7Mod")),
-#                  ("FSP3000R7Osc",
-#                   ToOne(ToManyCont,
-#                         "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OSC",
-#                         "FSP3000R7Mod")),
-#                  ("FSP3000R7Trans",
-#                   ToOne(ToManyCont,
-#                         "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Transponder",
-#                         "FSP3000R7Mod")),
-#                  ("FSP3000R7Road",
-#                   ToOne(ToManyCont,
-#                         "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Roadm",
-#                         "FSP3000R7Mod")),
-#                  ("FSP3000R7Rama",
-#                   ToOne(ToManyCont,
-#                         "ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Raman",
-#                         "FSP3000R7Mod")))
+
 
 InitializeClass(FSP3000R7Module)

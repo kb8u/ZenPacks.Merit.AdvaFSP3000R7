@@ -23,8 +23,9 @@ from Products.Zuul.utils import ZuulMessageFactory as _t
 
 class IModuleInfo(IComponentInfo):
     """ Info adapter for Module (container) component """
-    # Don't need to show any instance data
-    pass
+    inventoryUnitName = schema.Text(title    = u"Model",
+                                    readonly = True,
+                                    group    = 'Details')
 
 class IOSCInfo(IComponentInfo):
     """ Info adapter for Optical Service Channel component """
