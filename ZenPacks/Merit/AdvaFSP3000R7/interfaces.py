@@ -45,6 +45,12 @@ class IAmplifierInfo(IComponentInfo):
                                     readonly = True,
                                     group    = 'Details')
 
+class IRamanInfo(IComponentInfo):
+    """ Info adapter for Raman Amplifier component """
+    inventoryUnitName = schema.Text(title    = u"Model",
+                                    readonly = True,
+                                    group    = 'Details')
+
 class IRoadmInfo(IComponentInfo):
     """ Info adapter for ROADM component """
     inventoryUnitName = schema.Text(title    = u"Model",

@@ -11,7 +11,6 @@ from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibPickle import getCache
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FanModels import FanModels
 from ZenPacks.Merit.AdvaFSP3000R7.lib.NCUModels import NCUModels
 from ZenPacks.Merit.AdvaFSP3000R7.lib.PowerSupplyModels import PowerSupplyModels
-import os
 
 # flatten list of lists
 FanorNCUorPSModels = [item for sublist in \

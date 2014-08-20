@@ -41,6 +41,11 @@ class AmplifierInfo(ComponentInfo):
     inventoryUnitName = ProxyProperty("inventoryUnitName")
     interfaceConfigId = ProxyProperty("interfaceConfigId")
 
+class RamanInfo(ComponentInfo):
+    implements(interfaces.IRamanInfo)
+    inventoryUnitName = ProxyProperty("inventoryUnitName")
+    interfaceConfigId = ProxyProperty("interfaceConfigId")
+
 class RoadmInfo(ComponentInfo):
     implements(interfaces.IRoadmInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")

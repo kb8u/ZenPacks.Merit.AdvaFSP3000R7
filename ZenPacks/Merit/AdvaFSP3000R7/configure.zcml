@@ -79,6 +79,19 @@
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
             permission="zope2.Public" />
 
+        <!-- Raman Amplifier -->
+        <adapter
+            factory=".info.RamanInfo"
+            for=".FSP3000R7Raman.FSP3000R7Raman"
+            provides=".interfaces.IRamanInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Raman"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Raman.js"
+            weight="12"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
         <!-- ROADM -->
         <adapter
             factory=".info.RoadmInfo"

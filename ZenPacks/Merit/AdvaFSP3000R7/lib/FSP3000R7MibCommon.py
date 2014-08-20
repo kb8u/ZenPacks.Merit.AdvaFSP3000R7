@@ -18,9 +18,6 @@ from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableM
 from Products.DataCollector.plugins.DataMaps import ObjectMap
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Channels import Channels
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibPickle import getCache
-import time
-import os
-from pprint import pformat
 
 
 # Use SNMP data from Device Modeler in a cache file.  Can't be a PythonPlugin
