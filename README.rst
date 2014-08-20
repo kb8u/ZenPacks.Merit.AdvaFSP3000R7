@@ -38,6 +38,10 @@ Modelers detect most blade and pluggable optical hardware types:
 
   * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
+* Raman Amplifier
+
+  * Component template graphs total pump power and estimated signal gain
+
 * NCU-II (shelf controller card)
 
 * Transponder Component Modeling
@@ -49,6 +53,8 @@ Modelers detect most blade and pluggable optical hardware types:
   * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
 * Fan Component Modeling
+
+* Blade Modeling
 
 Adva MIBs
 ---------
@@ -76,7 +82,7 @@ the current value.
 Requirements
 ============
 
-* Zenoss Versions Supported: 3.0+
+* Zenoss Versions Supported: 4.0+
 * External Dependencies: None
 * ZenPack Dependencies: None
 * Configuration: No Special configuration should be necessary.
@@ -92,7 +98,7 @@ due to time out issues.  If this happens, try installing from the command line:
 Download the appropriate package for your Zenoss version from the Zenoss
 Zenpack site:
 
-* Zenoss 3.0+ `Latest Package`_
+* Zenoss 4.0+ `Latest Package`_
   
 Then copy it to your Zenoss server and run the following commands as the zenoss
 user::
@@ -167,6 +173,10 @@ Change History
 * 1.8
 
   * Added comments configured on components to GUI
+
+* 1.9
+
+  * Added Raman amplifiers and Blades.  Removed blades from other components.
 
 Known Issues
 ===========
