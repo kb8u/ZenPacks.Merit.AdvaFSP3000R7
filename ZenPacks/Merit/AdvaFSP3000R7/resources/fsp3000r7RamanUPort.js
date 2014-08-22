@@ -11,10 +11,10 @@ function render_link(ob) {
     }
 }
 
-ZC.FSP3000R7RamanPanel = Ext.extend(ZC.ComponentGridPanel, {
+ZC.FSP3000R7RamanUPortPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
-            componentType: 'FSP3000R7Raman',
+            componentType: 'FSP3000R7RamanUPort',
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
@@ -62,12 +62,12 @@ ZC.FSP3000R7RamanPanel = Ext.extend(ZC.ComponentGridPanel, {
                 renderer: Zenoss.render.pingStatus,
             }]
         });
-        ZC.FSP3000R7RamanPanel.superclass.constructor.call(this, config);
+        ZC.FSP3000R7RamanUPortPanel.superclass.constructor.call(this, config);
     }
 });
 
-Ext.reg('FSP3000R7RamanPanel', ZC.FSP3000R7RamanPanel);
-ZC.registerName('FSP3000R7Raman', _t('Raman Amplifier'),_t('Raman Amplifiers'));
+Ext.reg('FSP3000R7RamanUPortPanel', ZC.FSP3000R7RamanUPortPanel);
+ZC.registerName('FSP3000R7RamanUPort', _t('Raman Upgrade Port'),_t('Raman Upgrade Ports'));
 })();
 
 

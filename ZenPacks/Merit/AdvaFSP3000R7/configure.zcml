@@ -79,14 +79,27 @@
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
             permission="zope2.Public" />
 
-        <!-- Raman Amplifier -->
+        <!-- Raman Amplifier Network Port-->
         <adapter
-            factory=".info.RamanInfo"
-            for=".FSP3000R7Raman.FSP3000R7Raman"
-            provides=".interfaces.IRamanInfo" />
+            factory=".info.RamanNPortInfo"
+            for=".FSP3000R7RamanNPort.FSP3000R7RamanNPort"
+            provides=".interfaces.IRamanNPortInfo" />
         <browser:viewlet
-            name="js-AdvaFSP3000R7Raman"
-            paths="/++resource++AdvaFSP3000R7/fsp3000r7Raman.js"
+            name="js-AdvaFSP3000R7RamanNPort"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7RamanNPort.js"
+            weight="12"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
+        <!-- Raman Amplifier Upgrade Port-->
+        <adapter
+            factory=".info.RamanUPortInfo"
+            for=".FSP3000R7RamanUPort.FSP3000R7RamanUPort"
+            provides=".interfaces.IRamanUPortInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7RamanUPort"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7RamanUPort.js"
             weight="12"
             manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"

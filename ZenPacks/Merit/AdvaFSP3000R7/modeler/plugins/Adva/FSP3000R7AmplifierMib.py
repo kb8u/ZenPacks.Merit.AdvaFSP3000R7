@@ -36,9 +36,7 @@ class FSP3000R7AmplifierMib(FSP3000R7MibCommon):
                         'EDFA-C-D20-VGC-DM',
                         'EDFA-C-D20-VLGC-DM',
                         'EDFA-C-D27-GCB-DM',
-                        'RAMAN-C10',
                         'EDFA-C-S26-VGC-DM',
                         'EDFA-C-S26-VGCB-DM',
-                        '2RAMAN-C15-LL',
                         'AMP-S20H-C15',
                         'AMP-S20L-C15' ]
