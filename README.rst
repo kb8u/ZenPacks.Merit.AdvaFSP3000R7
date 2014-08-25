@@ -91,7 +91,13 @@ Installation
 ============
 Normal Installation (packaged egg)
 
-*NOTE* This is a large zenpack due to the size of the Adva MIB files included.
+*NOTE* This version requires a modified version of SnmpPerformanceConfig.py
+be copied to $ZENHOME/Products/ZenHub/services/ from the to_install directory
+of this Zenpack.  The modified version allows SNMP indexes to be at places
+other than the end of on OID.  As the zenoss user, copy the file before
+installing the .egg file.
+
+This is a large zenpack due to the size of the Adva MIB files included.
 Installation from the Zenoss web interface may fail on especially slow systems
 due to time out issues.  If this happens, try installing from the command line:
 
