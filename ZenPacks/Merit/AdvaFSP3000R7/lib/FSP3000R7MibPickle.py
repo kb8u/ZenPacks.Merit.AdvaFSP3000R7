@@ -58,10 +58,13 @@ def getCache (deviceId, modelerName, log):
             # create entry for the OPR responding module inself
             containsOPRModules[entityTable[entityIndex]['entityIndexAid']] = \
                  [entityIndex]
-            # create entry for the immediate parent
+            # create entry for the immediate parent or append
             parentIndex = str(entityTable[entityIndex]['entityContainedIn'])
             parentIndexAid = entityTable[parentIndex]['entityIndexAid']
-            containsOPRModules[parentIndexAid] = [entityIndex]
+            if parentIndexAid not in containsOPRModules:
+                containsOPRModules[parentIndexAid] = [entityIndex]
+            else:
+                containsOPRModules[parentIndexAid].append(entityIndex)
             # create entry for all parents above immediate parent
             while(parentIndex):
                 parentIndex = __get_parent(log,parentIndex,entityTable)
