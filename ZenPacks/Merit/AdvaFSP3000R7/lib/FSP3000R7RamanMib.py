@@ -59,9 +59,9 @@ class FSP3000R7RamanPortMib(SnmpPlugin):
 
         # look for blades containing RAMAN amplifier in inventory table
         for bladeEntityIndex in inventoryTable:
-            bladeInv = inventoryTable[bladeEntityIndex]
+            bladeInv = inventoryTable[bladeEntityIndex]['inventoryUnitName']
             bladeIndexAid = entityTable[bladeEntityIndex]['entityIndexAid']
-            if not bladeInv['inventoryUnitName'] in componentModels:
+            if not bladeInv in componentModels:
                 continue
             log.info('found Raman matching model %s' % bladeInv)
     
@@ -73,7 +73,7 @@ class FSP3000R7RamanPortMib(SnmpPlugin):
 
             om = self.objectMap()
             om.EntityIndex = int(portEntityIndex)
-            om.inventoryUnitName = portEntityIndexAid
+            om.inventoryUnitName = bladeInv
             if 'interfaceConfigIdentifier' in entityTable[portEntityIndex]:
                 om.interfaceConfigId = \
                    entityTable[portEntityIndex]['interfaceConfigIdentifier']
