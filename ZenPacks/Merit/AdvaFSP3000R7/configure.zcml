@@ -131,6 +131,19 @@
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
             permission="zope2.Public" />
 
+        <!-- 100Gig Muxsponder OTUs -->
+        <adapter
+            factory=".info.OTU100GInfo"
+            for=".FSP3000R7OTU100G.FSP3000R7OTU100G"
+            provides=".interfaces.IOTU100GInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7OTU100G"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7otu100g.js"
+            weight="14"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
         <!-- Fan -->
         <adapter
             factory=".info.FanInfo"

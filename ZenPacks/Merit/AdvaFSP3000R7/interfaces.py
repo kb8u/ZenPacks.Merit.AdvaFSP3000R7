@@ -68,6 +68,12 @@ class ITransponderInfo(IComponentInfo):
                                     readonly = True,
                                     group    = 'Details')
 
+class IOTU100GInfo(IComponentInfo):
+    """ Info adapter for 100G Transponder OTU component """
+    inventoryUnitName = schema.Text(title    = u"Model",
+                                    readonly = True,
+                                    group    = 'Details')
+
 class INCUInfo(IComponentInfo):
     """ Info adapter for NCU component """
     inventoryUnitName = schema.Text(title    = u"Model",
