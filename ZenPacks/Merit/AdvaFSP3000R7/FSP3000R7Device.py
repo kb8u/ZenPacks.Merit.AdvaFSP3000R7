@@ -53,7 +53,7 @@ class FSP3000R7Device(Device,ZenPackPersistence):
                     'FSP3000R7Dev')),
         ('FSP3000R7OTU100G',
          ToManyCont(ToOne,
-                    'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OTU100G',
+                    'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OTU100Gig',
                     'FSP3000R7Dev')),
         ('FSP3000R7Road',
          ToManyCont(ToOne,

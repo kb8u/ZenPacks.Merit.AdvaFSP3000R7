@@ -14,7 +14,7 @@ function render_link(ob) {
 ZC.FSP3000R7OTU100GPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
-            componentType: 'FSP3000R7OTU100G',
+            componentType: 'FSP3000R7OTU100Gig',
             fields: [
                 {name: 'uid'},
                 {name: 'severity'},
@@ -67,7 +67,7 @@ ZC.FSP3000R7OTU100GPanel = Ext.extend(ZC.ComponentGridPanel, {
 });
 
 Ext.reg('FSP3000R7OTU100GPanel', ZC.FSP3000R7OTU100GPanel);
-ZC.registerName('FSP3000R7OTU100G', _t('100G Muxsponder OTU'), _t('100G Muxsponder OTUs'));
+ZC.registerName('FSP3000R7OTU100Gig', _t('100G Muxsponder OTU'), _t('100G Muxsponder OTUs'));
 })();
 
 

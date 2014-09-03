@@ -134,7 +134,7 @@
         <!-- 100Gig Muxsponder OTUs -->
         <adapter
             factory=".info.OTU100GInfo"
-            for=".FSP3000R7OTU100G.FSP3000R7OTU100G"
+            for=".FSP3000R7OTU100Gig.FSP3000R7OTU100Gig"
             provides=".interfaces.IOTU100GInfo" />
         <browser:viewlet
             name="js-AdvaFSP3000R7OTU100G"

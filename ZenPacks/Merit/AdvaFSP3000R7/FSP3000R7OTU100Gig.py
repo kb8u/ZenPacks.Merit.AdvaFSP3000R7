@@ -1,6 +1,6 @@
 ######################################################################
 #
-# FSP3000R7OTU100G object class
+# FSP3000R7OTU100Gig object class
 #
 # Copyright (C) 2014 Russell Dwarshuis, Merit Network, Inc.
 #
@@ -9,9 +9,9 @@
 #
 ######################################################################
 
-__doc__="""FSP3000R7OTU100G
+__doc__="""FSP3000R7OTU100Gig
 
-FSP3000R7OTU100G is a 100 Gig Muxponder OTU component of a
+FSP3000R7OTU100Gig is a 100 Gig Muxponder OTU component of a
 FSP3000R7Device Device
 
 """
@@ -19,12 +19,12 @@ FSP3000R7Device Device
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7Component import *
 
 import logging
-log = logging.getLogger('FSP3000R7OTU100G')
+log = logging.getLogger('FSP3000R7OTU100Gig')
 
-class FSP3000R7OTU100G(FSP3000R7Component):
-    """FSP3000R7OTU100G object"""
+class FSP3000R7OTU100Gig(FSP3000R7Component):
+    """FSP3000R7OTU100Gig object"""
 
-    portal_type = meta_type = 'FSP3000R7OTU100G'
+    portal_type = meta_type = 'FSP3000R7OTU100Gig'
 
     _relations = (("FSP3000R7Dev",
                    ToOne(ToManyCont,
@@ -32,4 +32,4 @@ class FSP3000R7OTU100G(FSP3000R7Component):
                          "FSP3000R7OTU100G")),
         )
 
-InitializeClass(FSP3000R7OTU100G)
+InitializeClass(FSP3000R7OTU100Gig)

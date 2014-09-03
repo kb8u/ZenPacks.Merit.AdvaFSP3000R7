@@ -1,6 +1,6 @@
 ######################################################################
 #
-# FSP3000R7OTU100GtMib modeler plugin
+# FSP3000R7OTU100GMib modeler plugin
 #
 # Copyright (C) 2014 Russell Dwarshuis, Merit Network, Inc.
 #
@@ -9,7 +9,7 @@
 #
 ######################################################################
 
-__doc__="""FSP3000R7OTU100GPortMib
+__doc__="""FSP3000R7OTU100GMib
 
 FSP3000R7OTU100GMib maps 100G Muxsponder OTU pors on a FSP3000R7 system
 
@@ -17,6 +17,7 @@ FSP3000R7OTU100GMib maps 100G Muxsponder OTU pors on a FSP3000R7 system
 
 from re import match
 from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetTableMap, GetMap
+from Products.DataCollector.plugins.DataMaps import ObjectMap
 from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibPickle import getCache
 
 
@@ -24,9 +25,9 @@ from ZenPacks.Merit.AdvaFSP3000R7.lib.FSP3000R7MibPickle import getCache
 # since those run before any SnmpPlugin; device modeler is an PythonPlugin so
 # the cache file will be created before this is run.
 # Can't use FSP3000R7MibCommon since Muxsponder OTU ports don't respond to OPR
-class FSP3000R7OTU100GPortMib(SnmpPlugin):
+class FSP3000R7OTU100GMib(SnmpPlugin):
 
-    modname = 'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OTU100G'
+    modname = 'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OTU100Gig'
     relname = 'FSP3000R7OTU100G'
 
     # FspR7-MIB mib neSystemId is .1.3.6.1.4.1.2544.1.11.2.2.1.1.0.  Not used;
@@ -81,8 +82,8 @@ class FSP3000R7OTU100GPortMib(SnmpPlugin):
             om.id = self.prepId(om.entityIndexAid)
             om.title = om.entityIndexAid
             om.snmpindex = int(portEntityIndex)
-            log.info('Found OTU100G %s port at: %s inventoryUnitName: %s',
-                     self.portType,om.entityIndexAid, om.inventoryUnitName)
+            log.info('Found 100Gig Muxponder OTU at: %s inventoryUnitName: %s',
+                     om.entityIndexAid, om.inventoryUnitName)
 
             rm.append(om)
 
