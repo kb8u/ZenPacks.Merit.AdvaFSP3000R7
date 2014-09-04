@@ -137,8 +137,8 @@
             for=".FSP3000R7OTU100Gig.FSP3000R7OTU100Gig"
             provides=".interfaces.IOTU100GInfo" />
         <browser:viewlet
-            name="js-AdvaFSP3000R7OTU100G"
-            paths="/++resource++AdvaFSP3000R7/fsp3000r7otu100g.js"
+            name="js-AdvaFSP3000R7OTU100Gig"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7OTU100Gig.js"
             weight="14"
             manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"

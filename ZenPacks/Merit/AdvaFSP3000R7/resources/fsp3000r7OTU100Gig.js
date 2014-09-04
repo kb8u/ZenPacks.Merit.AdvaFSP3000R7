@@ -11,7 +11,7 @@ function render_link(ob) {
     }
 }
 
-ZC.FSP3000R7OTU100GPanel = Ext.extend(ZC.ComponentGridPanel, {
+ZC.FSP3000R7OTU100GigPanel = Ext.extend(ZC.ComponentGridPanel, {
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'FSP3000R7OTU100Gig',
@@ -62,11 +62,11 @@ ZC.FSP3000R7OTU100GPanel = Ext.extend(ZC.ComponentGridPanel, {
                 renderer: Zenoss.render.pingStatus
             }]
         });
-        ZC.FSP3000R7OTU100GPanel.superclass.constructor.call(this, config);
+        ZC.FSP3000R7OTU100GigPanel.superclass.constructor.call(this, config);
     }
 });
 
-Ext.reg('FSP3000R7OTU100GPanel', ZC.FSP3000R7OTU100GPanel);
+Ext.reg('FSP3000R7OTU100GigPanel', ZC.FSP3000R7OTU100GigPanel);
 ZC.registerName('FSP3000R7OTU100Gig', _t('100G Muxsponder OTU'), _t('100G Muxsponder OTUs'));
 })();
 
