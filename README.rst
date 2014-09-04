@@ -38,15 +38,19 @@ Modelers detect most blade and pluggable optical hardware types:
 
   * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
 
-* Raman Amplifier
+* Raman Amplifier network and upgrade ports
 
-  * Component template graphs total pump power and estimated signal gain
+  * Component template graphs optical power transmit, estimated signal gain, OSC gain, back reflection, OSC power received and Raman pump power
 
 * NCU-II (shelf controller card)
 
 * Transponder Component Modeling
 
-  * Component template graphs Laser bias current, Optical Power received and transmitted when it's available.
+  * Component template graphs Laser bias current, Optical Power received, bits/secnod, packets/second and ethernet errors/second.
+
+* 100 Gigabits OTU -N port Modeling
+
+  * Component templates for FEC uncorrected blocks, FEC corrected errors, BER before FEC and Logical lanes skey
 
 * Optical Service Channel Component Modeling
 
@@ -55,6 +59,8 @@ Modelers detect most blade and pluggable optical hardware types:
 * Fan Component Modeling
 
 * Blade Modeling
+
+  * Model number for each blade in a system
 
 Adva MIBs
 ---------
@@ -95,7 +101,7 @@ Normal Installation (packaged egg)
 be copied to $ZENHOME/Products/ZenHub/services/ from the to_install directory
 of this Zenpack.  The modified version allows SNMP indexes to be at places
 other than the end of on OID.  As the zenoss user, copy the file before
-installing the .egg file.
+restarting zenoss or the zenoss daemons.
 
 This is a large zenpack due to the size of the Adva MIB files included.
 Installation from the Zenoss web interface may fail on especially slow systems
@@ -110,12 +116,13 @@ Then copy it to your Zenoss server and run the following commands as the zenoss
 user::
 
     zenpack --install <package.egg>
+    cp $ZENHOME/ZenPacks/<package.egg>/to_install/SnmpPerformanceConfig.py $ZENHOME/Products/ZenHub/services
     zenoss restart
     
 If you don't want to do a full restart, you should be able to just restart
-zenhub and zopectl::
+zenhub, zenperfsnmp and zopectl::
 
-    zenhub restart &&  zopectl restart
+    zenhub restart && zenperfsnmp restart &&  zopectl restart
    
 Developer Installation (link mode)
 ----------------------------------
@@ -184,11 +191,16 @@ Change History
 
   * Added Raman amplifiers and Blades.  Removed blades from other components.
 
+* 1.10
+
+  * Added 100 Gig OTU.  Removed commands to get SNMP statistics where index is
+    not at the end of the OID
+
 Known Issues
 ===========
 
 * Component templates attempt to graph data that may not be available from
-  some components.  This will result in debg level events for SNMP variables
+  some components.  This may result in debg level events for SNMP variables
   that don't exist for the component.
 
 * The Device modeler FSP3000R7Mib must be run before any component modelers.
