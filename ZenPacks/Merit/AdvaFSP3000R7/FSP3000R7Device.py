@@ -2,7 +2,7 @@
 #
 # FSP3000R7Device object class
 #
-# Copyright (C) 2011 Russell Dwarshuis, Merit Network, Inc.
+# Copyright (C) 2014 Russell Dwarshuis, Merit Network, Inc.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -54,6 +54,10 @@ class FSP3000R7Device(Device,ZenPackPersistence):
         ('FSP3000R7OTU100G',
          ToManyCont(ToOne,
                     'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7OTU100Gig',
+                    'FSP3000R7Dev')),
+        ('FSP3000R7Optical100G',
+         ToManyCont(ToOne,
+                    'ZenPacks.Merit.AdvaFSP3000R7.FSP3000R7Optical100Gig',
                     'FSP3000R7Dev')),
         ('FSP3000R7Road',
          ToManyCont(ToOne,
