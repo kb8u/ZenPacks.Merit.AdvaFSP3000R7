@@ -66,6 +66,9 @@ class OTU100GInfo(ComponentInfo):
     inventoryUnitName = ProxyProperty("inventoryUnitName")
     interfaceConfigId = ProxyProperty("interfaceConfigId")
 
+class Optical100GInfo(ComponentInfo):
+    implements(interfaces.IOptical100GInfo)
+
 class NCUInfo(ComponentInfo):
     implements(interfaces.INCUInfo)
     inventoryUnitName = ProxyProperty("inventoryUnitName")

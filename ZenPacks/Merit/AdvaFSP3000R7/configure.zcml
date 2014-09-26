@@ -144,6 +144,19 @@
             class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
             permission="zope2.Public" />
 
+        <!-- 100Gig Optical -->
+        <adapter
+            factory=".info.Optical100GInfo"
+            for=".FSP3000R7Optical100Gig.FSP3000R7Optical100Gig"
+            provides=".interfaces.IOptical100GInfo" />
+        <browser:viewlet
+            name="js-AdvaFSP3000R7Optical100Gig"
+            paths="/++resource++AdvaFSP3000R7/fsp3000r7Optical100Gig.js"
+            weight="14"
+            manager="Products.ZenUI3.browser.interfaces.IJavaScriptSrcManager"
+            class="Products.ZenUI3.browser.javascript.JavaScriptSrcBundleViewlet"
+            permission="zope2.Public" />
+
         <!-- Fan -->
         <adapter
             factory=".info.FanInfo"

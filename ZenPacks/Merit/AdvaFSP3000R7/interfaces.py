@@ -69,7 +69,12 @@ class ITransponderInfo(IComponentInfo):
                                     group    = 'Details')
 
 class IOTU100GInfo(IComponentInfo):
-    """ Info adapter for 100G Transponder OTU component """
+    """ Info adapter for 100G Transponder OTU component."""
+    # Don't need to show any instance data
+    pass
+
+class IOptical100GInfo(IComponentInfo):
+    """ Info adapter for 100G Transponder Optical component """
     inventoryUnitName = schema.Text(title    = u"Model",
                                     readonly = True,
                                     group    = 'Details')

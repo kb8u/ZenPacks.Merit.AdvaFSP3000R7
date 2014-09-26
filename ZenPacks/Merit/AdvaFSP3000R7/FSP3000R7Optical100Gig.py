@@ -40,9 +40,6 @@ class FSP3000R7Optical100Gig(DeviceComponent,ManagedEntity,ZenPackPersistence):
                          "FSP3000R7Optical100G")),
         )
 
-    # set default properties
-    entityFacilityAidString = 'Not set by modeler'
-
     factory_type_information = ({
         'actions': ({
             'id': 'perfConf',
@@ -62,9 +59,7 @@ class FSP3000R7Optical100Gig(DeviceComponent,ManagedEntity,ZenPackPersistence):
 
     def viewName(self):
         """Human readable version of this object"""
-        if self.entityFacilityAidString == 'Not set by modeler':
-            return "Unknown"
-        return(self.entityFacilityAidString)
+        return(self.id)
 
     name = viewName
 
