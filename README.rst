@@ -48,9 +48,9 @@ Modelers detect most blade and pluggable optical hardware types:
 
   * Component template graphs Laser bias current, Optical Power received, bits/secnod, packets/second and ethernet errors/second.
 
-* 100 Gigabits OTU -N port Modeling
+* 100 Gigabit/s Transponder Network, Upgrade and optical component modeling
 
-  * Component templates for FEC uncorrected blocks, FEC corrected errors, BER before FEC and Logical lanes skey
+  * Component templates for FEC uncorrected blocks, FEC corrected errors, BER before FEC and Logical lanes, and optical power received on the 4 lanes.
 
 * Optical Service Channel Component Modeling
 
@@ -130,7 +130,7 @@ If you wish to further develop and possibly contribute back to this
 ZenPack you should clone the git repository, then install the ZenPack in
 developer mode using the following commands::
 
-    git clone git://github.com/zenoss/ZenPacks.Merit.AdvaFSP3000R7
+    git clone git://github.com/kb8u/zenoss/ZenPacks.Merit.AdvaFSP3000R7
     zenpack --link --install ZenPacks.Merit.AdvaFSP3000R7
     zenoss restart
     
@@ -193,17 +193,18 @@ Change History
 
 * 1.10
 
-  * Added 100 Gig OTU.  Removed commands to get SNMP statistics where index is
-    not at the end of the OID
+  * Added 100 Gig Transponder components.  Removed commands to get SNMP
+    statistics where index is not at the end of the OID
 
 Known Issues
 ===========
 
 * Component templates attempt to graph data that may not be available from
-  some components.  This may result in debg level events for SNMP variables
+  some components.  This may result in debug level events for SNMP variables
   that don't exist for the component.
 
-* The Device modeler FSP3000R7Mib must be run before any component modelers.
+* The Device modeler FSP3000R7DeviceMib must be run before any component
+  modelers.
 
 * SNMP cache file needs to be created in /tmp.  The file will not be removed
   when the device is deleted from zenoss.  The Adva system must have a name
