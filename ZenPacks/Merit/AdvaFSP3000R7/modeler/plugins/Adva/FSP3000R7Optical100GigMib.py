@@ -33,7 +33,7 @@ class FSP3000R7Optical100GigMib(SnmpPlugin):
 
         getdata, tabledata = results
 
-        log.info('got results: %s', pformat(tabledata))
+        log.debug('got results: %s', pformat(tabledata))
 
         # relationship mapping
         rm = self.relMap()
