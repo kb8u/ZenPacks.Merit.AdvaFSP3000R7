@@ -66,9 +66,6 @@ class FSP3000R7Optical100Gig(DeviceComponent,ManagedEntity,ZenPackPersistence):
     def device(self):
         return self.FSP3000R7Dev()
 
-    def monitored(self):
-        return True
-
     def manage_deleteComponent(self):
         self.getPrimaryParent()._delObject(self.id)
 

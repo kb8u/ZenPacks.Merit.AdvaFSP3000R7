@@ -30,8 +30,4 @@ class FSP3000R7PowerSupply(FSP3000R7Component):
                          "FSP3000R7PwrSupply")),
         )
 
-    # Power supplies can only be in a provisioned state
-    def monitored(self):
-        return True
-
 InitializeClass(FSP3000R7PowerSupply)

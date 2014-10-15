@@ -87,12 +87,5 @@ class FSP3000R7Component(DeviceComponent, ManagedEntity, ZenPackPersistence):
     def device(self):
         return self.FSP3000R7Dev()
 
-    def monitored(self):
-        """Monitor component if it's provisioned (same thing as assigned)"""
-        if self.entityAssignmentState:
-            return True
-        else:
-            return False
-
     def manage_deleteComponent(self):
         self.getPrimaryParent()._delObject(self.id)
