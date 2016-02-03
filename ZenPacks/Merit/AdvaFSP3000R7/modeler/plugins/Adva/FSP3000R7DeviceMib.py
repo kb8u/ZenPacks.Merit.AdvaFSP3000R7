@@ -110,6 +110,19 @@ class FSP3000R7DeviceMib(PythonPlugin):
         self.__make_cacheable('opticalIfDiagInputPower',
                               raw_opticalIfDiagInputPower,
                               opticalIfDiagTable)
+        # sometimes Avda shelves give bogus -65535 input power readings for
+        # components that really do have input power readings when you do a
+        # specific snmpget on them.
+        for index, opr_dict in opticalIfDiagTable.items():
+            try:
+                if opr_dict['opticalIfDiagInputPower'] == -65535:
+                    oid = opticalIfDiagInputPowerOID + '.' + index
+                    w = {}
+                    self.__snmpget(device,oid,'opr',w)
+                    opticalIfDiagTable[index] = \
+                            { 'opticalIfDiagInputPower' : int(w['opr']) }
+            except (KeyError, ValueError):
+                pass
         log.debug('opticalIfDiagTable: %s' % pformat(opticalIfDiagTable))
 
         cache_file_name = '/tmp/%s.Adva_inventory_SNMP.pickle' % device.id
