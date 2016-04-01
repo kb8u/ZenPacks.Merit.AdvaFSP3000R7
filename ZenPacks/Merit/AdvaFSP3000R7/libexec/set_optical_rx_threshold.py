@@ -2,8 +2,8 @@
 
 ################################################################################
 #
-# This program is part of the Adva FSP3000R7 Zenpack for Zenoss.
-# Copyright (C) 2013 Russell Dwarshuis
+# This program is part of the Adva FSP150CC Zenpack for Zenoss.
+# Copyright (C) 2015 Russell Dwarshuis
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -12,9 +12,8 @@
 
 usage = '''
 Create rrd template local copy and/or update the threshold for receive
-optical power on all transponders, amplifiers, ROADMs and OSCs so that they
-will generate an Error level alert if the optical signal degrades 3 dB from
-the current value.
+optical power on all applicable Adva components so that they will generate an
+Error level alert if the optical signal degrades 3 dB from the current value.
 
 set_optical_rx_threshold.py <device>
 '''
@@ -26,6 +25,9 @@ import Globals
 import subprocess
 from Products.ZenUtils.ZenScriptBase import ZenScriptBase
 from transaction import commit
+
+# allow this many dB loss from initial OPR
+lossmargin = 3
 
 dmd = ZenScriptBase(connect=True).dmd
 
@@ -46,8 +48,18 @@ for component in device.getMonitoredComponents():
     if component.__class__.__name__ not in [ 'FSP3000R7Roadm',
                                              'FSP3000R7Amplifier',
                                              'FSP3000R7Transponder',
-                                             'FSP3000R7OSC' ]:
+                                             'FSP3000R7OSC',
+                                             'FSP150NetPort' ]:
         continue
+
+    # 3000R7 uses centibels, 150CC uses decibels, datapoint is named differently
+    if component.__class__.__name__ == 'FSP150NetPort':
+        opr_dp = 'cmEthernetNetPortStatsOPR'
+        scale = 1
+    else:
+        opr_dp = 'Optical input power'
+        scale = 10
+
     # don't set thresholds on containers
     if re.search('^MOD-\d',component.id,flags=re.IGNORECASE):
         continue
@@ -67,37 +79,20 @@ for component in device.getMonitoredComponents():
         continue
 
     # get current value from rrd
-### BUG: next line throws exception (due to spaces in string & bug in library?)
-### workaround is to get the value from the rrdfile with rrdtool
-#    current = component.getRRDValue('Optical input power_Optical input power')
-    rrdfile = os.environ['ZENHOME'] + '/perf/' + \
-        component.getRRDFileName('Optical input power_Optical input power')
-    sp = subprocess.Popen(['rrdtool','lastupdate', rrdfile],
-                          stdout = subprocess.PIPE,
-                          stderr = subprocess.PIPE)
-    out,err = sp.communicate()
-    if err:
-        print '%s threshold not changed:' % component.id
-        print 'rrd file is missing or too new. Try again in 10 minutes.'
-        continue
-    current = out.split()[-1]
-    if current is None:
-        print '%s threshold not changed:' % component.id
-        print "Couldn't read value from rrd file."
-        continue
-    try:
-        current = float(current)
-    except ValueError:
+### BUG: next line throws exception if there's spaces in string
+### See bug fix in RenderServer.py in to_install directory
+    current = component.getRRDValue(opr_dp)
+    if str(current) == 'nan' or current is None:
         print '%s threshold not changed:' % component.id
         print "Couldn't read value from rrd file."
         continue
 
-    new_minval = current - 30.0
+    new_minval = current - lossmargin * scale
     threshold.minval = str(new_minval)
     threshold.enabled = True
 
     commit()
     print 'Changed %s threshold to %.1f dBm' % \
-                 (component.id,float(new_minval)/10)
+                 (component.id,float(new_minval)/scale)
 
 print 'Command completed.'

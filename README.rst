@@ -79,7 +79,7 @@ Event Class mapping
 Command
 ------
 
-- update_Adva_optical_power_threshold
+- update_Adva_OPR_threshold
 Create rrd template local copy and/or update the threshold for receive
 optical power on amplifiers, transponders, OSCs and ROADMs so that they will
 generate an Error level alert if the optical signal degrades 3 dB from
@@ -101,7 +101,9 @@ Normal Installation (packaged egg)
 be copied to $ZENHOME/Products/ZenHub/services/ from the to_install directory
 of this Zenpack.  The modified version allows SNMP indexes to be at places
 other than the end of on OID.  As the zenoss user, copy the file before
-restarting zenoss or the zenoss daemons.
+restarting zenoss or the zenoss daemons.  Also, the update_Adva_OPR_threshold
+command will not work unless a bug fix in RenderServer.py is installed in
+$ZENHOME/Products/ZenRRD
 
 This is a large zenpack due to the size of the Adva MIB files included.
 Installation from the Zenoss web interface may fail on especially slow systems
@@ -117,6 +119,7 @@ user::
 
     zenpack --install <package.egg>
     cp $ZENHOME/ZenPacks/<package.egg>/to_install/SnmpPerformanceConfig.py $ZENHOME/Products/ZenHub/services
+    cp $ZENHOME/ZenPacks/<package.egg>/to_install/RenderServer.py $ZENHOME/Products/ZenRRD
     zenoss restart
     
 If you don't want to do a full restart, you should be able to just restart
@@ -195,6 +198,17 @@ Change History
 
   * Added 100 Gig Transponder components.  Removed commands to get SNMP
     statistics where index is not at the end of the OID
+
+* 1.12
+
+  * Changed modeler to retry bogus optical power receive recadings with
+    snmpget.
+
+* 1.13
+
+  * Changed update_Adva_OPR_threshold to work on both FSP3000R7 and FSP150CC
+    models.  Fixed bug in RenderServer.py so the command will work on devices
+    on remote collectors.
 
 Known Issues
 ===========
