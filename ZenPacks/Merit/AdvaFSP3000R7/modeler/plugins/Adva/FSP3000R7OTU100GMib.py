@@ -42,7 +42,9 @@ class FSP3000R7OTU100GMib(SnmpPlugin):
         componentModels = ['10TCC-PCTN-10G+100GB',
                            '10TCC-PCTN-10G+100GC',
                            '10TCE-PCN-10G+100G',
-                           '10TCE-PCN-10G+100G-GF']
+                           '10TCE-PCN-10G+100G-GF',
+                           'WCC-PCTN-100GA',
+                           'WCC-PCTN-100GB']
 
         # SNMP table
         getdata, tabledata = results
