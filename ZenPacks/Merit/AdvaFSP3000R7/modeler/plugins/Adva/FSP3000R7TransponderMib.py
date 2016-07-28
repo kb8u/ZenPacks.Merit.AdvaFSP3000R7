@@ -28,6 +28,7 @@ class FSP3000R7TransponderMib(FSP3000R7MibCommon):
                         'WCC-PCTN-100GB',
                         'WCC-PCTN-100GA',
                         '10TCC-PCTN-10G+100GB',
+                        '10TCC-PCTN-10G+100GC',
                         'WCC-PCTN-10G-LN#DC',
                         'WCC-PCTN-10G-V#DC',
                         'WCC-PCTN-10G-V#DL',
@@ -49,6 +50,9 @@ class FSP3000R7TransponderMib(FSP3000R7MibCommon):
                         '2TWCC-PCN-2G7U',
                         'WCC-PC1N-2G7U',
                         '4TCC-PCN-2G1U+2G5',
+                        'WCC-PCN-100G',
+                        'WCC-PCN-100GA',
+                        'WCC-PCN-100GB',
                         # Access Type Channel modules
                         '2PCA-PCN-10G',
                         '10PCA-PCN-1G3-10G',

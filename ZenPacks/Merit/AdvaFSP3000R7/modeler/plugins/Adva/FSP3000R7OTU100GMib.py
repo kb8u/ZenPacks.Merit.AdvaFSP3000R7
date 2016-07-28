@@ -11,7 +11,7 @@
 
 __doc__="""FSP3000R7OTU100GMib
 
-FSP3000R7OTU100GMib maps 100G Muxsponder OTU pors on a FSP3000R7 system
+FSP3000R7OTU100GMib maps 100G Muxsponder OTU ports on a FSP3000R7 system
 
 """
 
@@ -39,7 +39,10 @@ class FSP3000R7OTU100GMib(SnmpPlugin):
         log.info('processing %s for device %s', self.name(), device.id)
 
         # These models contain OTU100G amplifiers to look for network ports on
-        componentModels = ['10TCE-PCN-10G+100G']
+        componentModels = ['10TCC-PCTN-10G+100GB',
+                           '10TCC-PCTN-10G+100GC',
+                           '10TCE-PCN-10G+100G',
+                           '10TCE-PCN-10G+100G-GF']
 
         # SNMP table
         getdata, tabledata = results
@@ -62,7 +65,7 @@ class FSP3000R7OTU100GMib(SnmpPlugin):
             bladeIndexAid = entityTable[bladeEntityIndex]['entityIndexAid']
             if not bladeInv in componentModels:
                 continue
-            log.info('found 100G Muxmponder OTU matching model %s' % bladeInv)
+            log.info('found 100G Muxponder OTU matching model %s' % bladeInv)
     
             # find ports from entityContainedIn for 100G OTU entityIndex
             portEntityIndex,portEntityIndexAid = \
